@@ -13,6 +13,7 @@ set gyro_lpf1_dyn_min_hz = 0
 set gyro_lpf1_dyn_max_hz = 0
 set simplified_dterm_filter_multiplier = 140
 set dterm_lpf1_static_hz = 0
+set dshot_bidir = ON
 set rpm_filter_harmonics = 1
 set dyn_notch_count = 1
 set dyn_notch_q = 350

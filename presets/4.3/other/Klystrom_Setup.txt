@@ -1,0 +1,57 @@
+#$ TITLE: Klystrom Setup 4.3
+#$ FIRMWARE_VERSION: 4.3
+#$ CATEGORY: OTHER
+#$ STATUS: COMMUNITY
+#$ KEYWORDS: klystrom, setup
+#$ AUTHOR: KlystromFPV
+#$ DESCRIPTION: Misc stuff that I usually configure in my quad
+
+# name: KLYSTROM
+set name = KLYSTROM
+
+# feature
+feature -AIRMODE
+feature -ANTI_GRAVITY
+feature TELEMETRY
+
+# beeper
+beeper -RX_LOST
+beeper -RX_LOST_LANDING
+beeper -DISARMING
+beeper -ARMING_GPS_FIX
+beeper -BAT_CRIT_LOW
+beeper -BAT_LOW
+beeper -GPS_STATUS
+beeper -ACC_CALIBRATION
+beeper -ACC_CALIBRATION_FAIL
+beeper -READY_BEEP
+beeper -DISARM_REPEAT
+beeper -ARMED
+beeper -ON_USB
+beeper -CAM_CONNECTION_OPEN
+beeper -CAM_CONNECTION_CLOSE
+
+# beacon
+beacon RX_SET
+
+# map
+map TERA1234
+
+# rxfail
+rxfail 0 s 1500
+rxfail 1 s 1500
+rxfail 2 s 1500
+rxfail 3 s 875
+
+# master
+set mag_hardware = NONE
+set baro_hardware = NONE
+set blackbox_sample_rate = 1/8
+set debug_mode = GYRO_SCALED
+set yaw_motors_reversed = ON
+set small_angle = 180
+set deadband = 4
+set yaw_deadband = 6
+
+set pidsum_limit = 1000
+set pidsum_limit_yaw = 1000

@@ -257,6 +257,7 @@
       "rushfpv",
       "russia",
       "sbus",
+      "setup",
       "shames",
       "shark bite",
       "smooth",
@@ -698,7 +699,7 @@
     },
     {
       "fullPath": "presets/4.3/filters/Klystrom_clean.txt",
-      "hash": "86e9f107725881954759974258ecd75d892f8a942c77364c75eda91505b446a4",
+      "hash": "6e10a728ac54227c07e2fd94a8c20ffca4010ec8421f027c56dcbc6a5d8c40c5",
       "options": [],
       "title": "Klystrom Clean Build",
       "firmware_version": [
@@ -919,6 +920,25 @@
       "discussion": "https://github.com/betaflight/firmware-presets/pull/110",
       "include": [
         "presets/4.3/other/reset_blackbox.txt"
+      ]
+    },
+    {
+      "fullPath": "presets/4.3/other/Klystrom_Setup.txt",
+      "hash": "c26b4bfbb65271efe2595e827da528a938f2df9e7ee66614414f0880c735d01a",
+      "options": [],
+      "title": "Klystrom Setup 4.3",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "OTHER",
+      "status": "COMMUNITY",
+      "keywords": [
+        "klystrom",
+        "setup"
+      ],
+      "author": "KlystromFPV",
+      "description": [
+        "Misc stuff that I usually configure in my quad"
       ]
     },
     {
