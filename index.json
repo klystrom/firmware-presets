@@ -181,6 +181,7 @@
       "SupaflyFPV",
       "TBS",
       "UAV Tech",
+      "VTX",
       "\\\\GAS",
       "actual",
       "adjustments",
@@ -287,7 +288,6 @@
       "very",
       "very clean",
       "very noisy",
-      "vtx",
       "vtx table",
       "vtxtable",
       "world champion",
@@ -760,6 +760,50 @@
       "author": "Betaflight",
       "description": [
         "Resets modes and adjustment ranges to 4.3 defaults"
+      ]
+    },
+    {
+      "fullPath": "presets/4.3/modes/Klystrom_vtx_pit_mode.txt",
+      "hash": "caa5e024f467008c0972e906bb2ba1b125d3899d546314322cccba0b82ff5240",
+      "options": [],
+      "title": "Klystrom Modes with VTX ON/OFF",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "MODES",
+      "status": "COMMUNITY",
+      "keywords": [
+        "mode",
+        "modes",
+        "aux",
+        "switch",
+        "VTX"
+      ],
+      "author": "KlystromFPV",
+      "description": [
+        "My modes configuration if VTX on/off is available at FC"
+      ]
+    },
+    {
+      "fullPath": "presets/4.3/modes/Klystrom_vtx_toggle.txt",
+      "hash": "c45dced52403a59aa526b1705b598c28d241a1e6a9fbf9f44bd17d05c37ed5ec",
+      "options": [],
+      "title": "Klystrom Modes with VTX ON/OFF",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "MODES",
+      "status": "COMMUNITY",
+      "keywords": [
+        "mode",
+        "modes",
+        "aux",
+        "switch",
+        "VTX"
+      ],
+      "author": "KlystromFPV",
+      "description": [
+        "My modes configuration if VTX on/off is available at FC"
       ]
     },
     {

@@ -1,0 +1,16 @@
+#$ TITLE: Klystrom Modes with VTX ON/OFF
+#$ FIRMWARE_VERSION: 4.3
+#$ CATEGORY: MODES
+#$ STATUS: COMMUNITY
+#$ KEYWORDS: mode, modes, aux, switch, VTX
+#$ AUTHOR: KlystromFPV
+#$ DESCRIPTION: My modes configuration if VTX on/off is available at FC
+
+
+
+aux 0 0 0 1700 2100 0 0
+aux 1 2 1 900 1300 0 0
+aux 2 13 2 1700 2100 0 0
+aux 3 28 3 1700 2100 0 0
+aux 4 35 1 1700 2100 0 0
+aux 5 40 3 1200 2100 0 0
