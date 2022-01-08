@@ -125,6 +125,7 @@
       "Ivan Efimov (Limon)",
       "Joshua Bardwell",
       "Klystrom",
+      "KlystromFPV",
       "Mark Spatz (UAV Tech)",
       "MinChan Kim",
       "NemesisXB",
@@ -758,6 +759,26 @@
       "author": "Betaflight",
       "description": [
         "Resets the OSD values back to Betaflight 4.3 defaults"
+      ]
+    },
+    {
+      "fullPath": "presets/4.3/osd/Klystrom_OSD.txt",
+      "hash": "5cee2bc71a4cc98ac283a18ab9f3dd9321fced34ac4ab0b0be252bc7e8d385ba",
+      "options": [],
+      "title": "KlystromFPV Freestyle OSD",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "OSD",
+      "status": "COMMUNITY",
+      "keywords": [
+        "klystrom",
+        "OSD",
+        "freestyle"
+      ],
+      "author": "KlystromFPV",
+      "description": [
+        "Freestyle OSD"
       ]
     },
     {
