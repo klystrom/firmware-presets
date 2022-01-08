@@ -124,7 +124,6 @@
       "IllusionFpv",
       "Ivan Efimov (Limon)",
       "Joshua Bardwell",
-      "Klystrom",
       "KlystromFPV",
       "Mark Spatz (UAV Tech)",
       "MinChan Kim",
@@ -168,6 +167,7 @@
       "IRC",
       "IllusionFpv",
       "KarateBrot",
+      "KlystromFPV",
       "Limon",
       "MinChan",
       "MultiGP",
@@ -699,7 +699,7 @@
     },
     {
       "fullPath": "presets/4.3/filters/Klystrom_clean.txt",
-      "hash": "6e10a728ac54227c07e2fd94a8c20ffca4010ec8421f027c56dcbc6a5d8c40c5",
+      "hash": "095a52cd944a574f21bf71518a5324aa2bbcf135ef0202a4b5c8531880a8d1e5",
       "options": [],
       "title": "Klystrom Clean Build",
       "firmware_version": [
@@ -709,6 +709,7 @@
       "status": "COMMUNITY",
       "keywords": [
         "klystrom",
+        "KlystromFPV",
         "filter",
         "filters",
         "clean"
@@ -765,15 +766,17 @@
     },
     {
       "fullPath": "presets/4.3/modes/Klystrom_vtx_pit_mode.txt",
-      "hash": "caa5e024f467008c0972e906bb2ba1b125d3899d546314322cccba0b82ff5240",
+      "hash": "0c04855b490b2f32cab7f40fa899b9ac9b4391d5d1ebc85ffd9ea4ac2ad43fb5",
       "options": [],
-      "title": "Klystrom Modes with VTX ON/OFF",
+      "title": "Klystrom Modes VTX PitMode",
       "firmware_version": [
         "4.3"
       ],
       "category": "MODES",
       "status": "COMMUNITY",
       "keywords": [
+        "klystrom",
+        "KlystromFPV",
         "mode",
         "modes",
         "aux",
@@ -782,12 +785,12 @@
       ],
       "author": "KlystromFPV",
       "description": [
-        "My modes configuration if VTX on/off is available at FC"
+        "My modes configuration if VTX on/off is not available at FC. If not \"turned ON\", VTX shall be at PitMode."
       ]
     },
     {
       "fullPath": "presets/4.3/modes/Klystrom_vtx_toggle.txt",
-      "hash": "c45dced52403a59aa526b1705b598c28d241a1e6a9fbf9f44bd17d05c37ed5ec",
+      "hash": "13ed047753d437bf2269181c38c31389b03a4642292147de756b0e4545739da6",
       "options": [],
       "title": "Klystrom Modes with VTX ON/OFF",
       "firmware_version": [
@@ -796,6 +799,8 @@
       "category": "MODES",
       "status": "COMMUNITY",
       "keywords": [
+        "klystrom",
+        "KlystromFPV",
         "mode",
         "modes",
         "aux",
@@ -828,8 +833,8 @@
       ]
     },
     {
-      "fullPath": "presets/4.3/osd/Klystrom_OSD.txt",
-      "hash": "5cee2bc71a4cc98ac283a18ab9f3dd9321fced34ac4ab0b0be252bc7e8d385ba",
+      "fullPath": "presets/4.3/osd/Klystrom_freestyle.txt",
+      "hash": "ecc984384dabd24c6533baf6b36601fb7dc4c943501ed3a8a1dca8ff973713a6",
       "options": [],
       "title": "KlystromFPV Freestyle OSD",
       "firmware_version": [
@@ -839,6 +844,7 @@
       "status": "COMMUNITY",
       "keywords": [
         "klystrom",
+        "KlystromFPV",
         "OSD",
         "freestyle"
       ],
@@ -924,7 +930,7 @@
     },
     {
       "fullPath": "presets/4.3/other/Klystrom_Setup.txt",
-      "hash": "c26b4bfbb65271efe2595e827da528a938f2df9e7ee66614414f0880c735d01a",
+      "hash": "6c99b5bfccb68d9283ec062780385c38d0f797b9993bfc71f608bd6a999456a8",
       "options": [],
       "title": "Klystrom Setup 4.3",
       "firmware_version": [
@@ -934,6 +940,7 @@
       "status": "COMMUNITY",
       "keywords": [
         "klystrom",
+        "KlystromFPV",
         "setup"
       ],
       "author": "KlystromFPV",
@@ -1356,7 +1363,7 @@
     },
     {
       "fullPath": "presets/4.3/rates/Klystrom.txt",
-      "hash": "239728da8999006e52393f3b621e14b95a35e96c6b86e18c1aa630bdc34b9be7",
+      "hash": "60cb76bb61ee4ada8b08590f4d1b7f3d41e89fddebb04d620294a490b6fb3ae7",
       "options": [],
       "title": "Klystrom rates",
       "firmware_version": [
@@ -1366,14 +1373,12 @@
       "status": "COMMUNITY",
       "keywords": [
         "klystrom",
+        "KlystromFPV",
         "freestyle"
       ],
-      "author": "Klystrom",
+      "author": "KlystromFPV",
       "description": [
         "Freestyle rates with 960 deg/sec for roll/pitch and 800 deg/sec for yaw. Been using this rates since I started FPV."
-      ],
-      "include": [
-        "presets/4.3/rates/defaults.txt"
       ]
     },
     {

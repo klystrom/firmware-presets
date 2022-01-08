@@ -2,7 +2,7 @@
 #$ FIRMWARE_VERSION: 4.3
 #$ CATEGORY: OTHER
 #$ STATUS: COMMUNITY
-#$ KEYWORDS: klystrom, setup
+#$ KEYWORDS: klystrom, KlystromFPV, setup
 #$ AUTHOR: KlystromFPV
 #$ DESCRIPTION: Misc stuff that I usually configure in my quad
 

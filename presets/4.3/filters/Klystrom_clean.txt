@@ -2,7 +2,7 @@
 #$ FIRMWARE_VERSION: 4.3
 #$ CATEGORY: FILTERS
 #$ STATUS: COMMUNITY
-#$ KEYWORDS: klystrom, filter, filters, clean
+#$ KEYWORDS: klystrom, KlystromFPV, filter, filters, clean
 #$ AUTHOR: KlystromFPV
 #$ DESCRIPTION: For clean builds, very little filtering
 
