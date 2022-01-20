@@ -1,16 +1,18 @@
-#$ TITLE: Klystrom Clean Build
+#$ TITLE: Klystrom Clean Build F4
 #$ FIRMWARE_VERSION: 4.3
 #$ CATEGORY: FILTERS
 #$ STATUS: COMMUNITY
 #$ KEYWORDS: klystrom, KlystromFPV, filter, filters, clean
 #$ AUTHOR: KlystromFPV
-#$ DESCRIPTION: For clean builds, very little filtering
+#$ DESCRIPTION: For clean builds, very little filtering. Using F4 with Bidirectional DSHOT. For F4, FC should be running 4K PID loop which requires a static LPF of 500Hz to remove aliasing issues.
 
-set simplified_gyro_filter_multiplier = 150
+set gyro_lpf1_type = PT1
 set gyro_lpf1_static_hz = 0
-set gyro_lpf2_static_hz = 0
+set gyro_lpf2_type = PT1
+set gyro_lpf2_static_hz = 500
 set gyro_lpf1_dyn_min_hz = 0
 set gyro_lpf1_dyn_max_hz = 0
+set simplified_gyro_filter_multiplier = 100
 set simplified_dterm_filter_multiplier = 140
 set dterm_lpf1_static_hz = 0
 set dshot_bidir = ON

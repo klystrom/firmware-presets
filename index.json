@@ -698,10 +698,10 @@
       ]
     },
     {
-      "fullPath": "presets/4.3/filters/Klystrom_clean.txt",
-      "hash": "095a52cd944a574f21bf71518a5324aa2bbcf135ef0202a4b5c8531880a8d1e5",
+      "fullPath": "presets/4.3/filters/Klystrom_clean_F4.txt",
+      "hash": "8c88c7d3d098864e776ce6aab8cd29dd6fdef0c7157568fc120513747c3636d6",
       "options": [],
-      "title": "Klystrom Clean Build",
+      "title": "Klystrom Clean Build F4",
       "firmware_version": [
         "4.3"
       ],
@@ -716,7 +716,29 @@
       ],
       "author": "KlystromFPV",
       "description": [
-        "For clean builds, very little filtering"
+        "For clean builds, very little filtering. Using F4 with Bidirectional DSHOT. For F4, FC should be running 4K PID loop which requires a static LPF of 500Hz to remove aliasing issues."
+      ]
+    },
+    {
+      "fullPath": "presets/4.3/filters/Klystrom_clean_F7.txt",
+      "hash": "d90df864c6ca60a4bdcbb75cf53065b728eae9976b045b42988af8410402526f",
+      "options": [],
+      "title": "Klystrom Clean Build F7",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "FILTERS",
+      "status": "COMMUNITY",
+      "keywords": [
+        "klystrom",
+        "KlystromFPV",
+        "filter",
+        "filters",
+        "clean"
+      ],
+      "author": "KlystromFPV",
+      "description": [
+        "For clean builds, very little filtering. Using F7 with Bidirectional DSHOT."
       ]
     },
     {
@@ -930,7 +952,7 @@
     },
     {
       "fullPath": "presets/4.3/other/Klystrom_Setup.txt",
-      "hash": "6c99b5bfccb68d9283ec062780385c38d0f797b9993bfc71f608bd6a999456a8",
+      "hash": "d0010d088d50df379d2b0ccb07c6be78c620551505018e5f0af86e7ad657c176",
       "options": [],
       "title": "Klystrom Setup 4.3",
       "firmware_version": [

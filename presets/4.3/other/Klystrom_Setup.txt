@@ -53,5 +53,14 @@ set small_angle = 180
 set deadband = 4
 set yaw_deadband = 6
 
+profile 0
+set pidsum_limit = 1000
+set pidsum_limit_yaw = 1000
+
+profile 1
+set pidsum_limit = 1000
+set pidsum_limit_yaw = 1000
+
+profile 2
 set pidsum_limit = 1000
 set pidsum_limit_yaw = 1000
