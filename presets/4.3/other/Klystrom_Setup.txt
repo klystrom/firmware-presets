@@ -10,29 +10,29 @@
 set name = KLYSTROM
 
 # feature
+feature -RX_PARALLEL_PWM
 feature -AIRMODE
-feature -ANTI_GRAVITY
+feature INFLIGHT_ACC_CAL
+feature RX_SERIAL
 feature TELEMETRY
+feature OSD
 
 # beeper
 beeper -RX_LOST
 beeper -RX_LOST_LANDING
-beeper -DISARMING
-beeper -ARMING_GPS_FIX
 beeper -BAT_CRIT_LOW
 beeper -BAT_LOW
-beeper -GPS_STATUS
-beeper -ACC_CALIBRATION
-beeper -ACC_CALIBRATION_FAIL
-beeper -READY_BEEP
 beeper -DISARM_REPEAT
 beeper -ARMED
 beeper -ON_USB
-beeper -CAM_CONNECTION_OPEN
-beeper -CAM_CONNECTION_CLOSE
 
-# beacon
-beacon RX_SET
+# aux
+aux 0 0 0 1700 2100 0 0
+aux 1 1 1 900 1300 0 0
+aux 2 13 2 1700 2100 0 0
+aux 3 28 3 1700 2100 0 0
+aux 4 35 1 1700 2100 0 0
+aux 5 39 3 900 1200 0 0
 
 # map
 map TERA1234
@@ -42,6 +42,7 @@ rxfail 0 s 1500
 rxfail 1 s 1500
 rxfail 2 s 1500
 rxfail 3 s 875
+rxfail 5 s 1050
 
 # master
 set mag_hardware = NONE
@@ -51,16 +52,22 @@ set debug_mode = GYRO_SCALED
 set yaw_motors_reversed = ON
 set small_angle = 180
 set deadband = 4
-set yaw_deadband = 6
+set yaw_deadband = 2
 
 profile 0
+set angle_level_strength = 100
+set horizon_level_strength = 100
 set pidsum_limit = 1000
 set pidsum_limit_yaw = 1000
 
 profile 1
+set angle_level_strength = 100
+set horizon_level_strength = 100
 set pidsum_limit = 1000
 set pidsum_limit_yaw = 1000
 
 profile 2
+set angle_level_strength = 100
+set horizon_level_strength = 100
 set pidsum_limit = 1000
 set pidsum_limit_yaw = 1000

@@ -1,0 +1,47 @@
+#$ TITLE: KlystromFPV Long Range OSD
+#$ FIRMWARE_VERSION: 4.3
+#$ CATEGORY: OSD
+#$ STATUS: COMMUNITY
+#$ KEYWORDS: klystrom, KlystromFPV, OSD, long range
+#$ AUTHOR: KlystromFPV
+#$ DESCRIPTION: Long Range OSD
+
+set osd_warn_batt_not_full = OFF
+set osd_warn_core_temp = OFF
+set osd_warn_launch_control = OFF
+set osd_warn_link_quality = ON
+set osd_warn_over_cap = ON
+set osd_rssi_alarm = 80
+set osd_cap_alarm = 3200
+set osd_alt_alarm = 150
+set osd_vbat_pos = 2113
+set osd_link_quality_pos = 2465
+set osd_rssi_dbm_pos = 2497
+set osd_tim_2_pos = 2440
+set osd_flymode_pos = 473
+set osd_anti_gravity_pos = 443
+set osd_current_pos = 2454
+set osd_mah_drawn_pos = 2136
+set osd_craft_name_pos = 2412
+set osd_gps_speed_pos = 2433
+set osd_gps_lon_pos = 2512
+set osd_gps_lat_pos = 2480
+set osd_gps_sats_pos = 2448
+set osd_home_dir_pos = 2127
+set osd_home_dist_pos = 2472
+set osd_flight_dist_pos = 424
+set osd_compass_bar_pos = 2155
+set osd_altitude_pos = 18888
+set osd_warnings_pos = 14634
+set osd_avg_cell_voltage_pos = 2145
+set osd_disarmed_pos = 2316
+set osd_nheading_pos = 408
+set osd_efficiency_pos = 2166
+set osd_stat_max_spd = OFF
+set osd_stat_max_dist = ON
+set osd_stat_min_batt = OFF
+set osd_stat_battery = ON
+set osd_stat_min_rssi = OFF
+set osd_stat_max_alt = ON
+set osd_stat_min_link_quality = ON
+set osd_stat_flight_dist = ON

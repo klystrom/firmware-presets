@@ -325,7 +325,7 @@
       "Llama",
       "log",
       "logging",
-      "Long Range",
+      "long range",
       "mamba",
       "meteor",
       "MinChan",
@@ -942,6 +942,24 @@
       "priority": 0
     },
     {
+      "fullPath": "presets/4.3/osd/Klystrom_LongRange.txt",
+      "hash": "698eb1ea2ac6622e66a1e6d7e66ffb93bc98b19521a674fc103c39a8d5ea1e00",
+      "title": "KlystromFPV Long Range OSD",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "OSD",
+      "status": "COMMUNITY",
+      "keywords": [
+        "klystrom",
+        "KlystromFPV",
+        "OSD",
+        "long range"
+      ],
+      "author": "KlystromFPV",
+      "priority": 0
+    },
+    {
       "fullPath": "presets/4.3/osd/UAV_tech_Analog.txt",
       "hash": "b304bd4f3d0e6ab42840badced7e07847ca654c5fd048dba8c53b96128788763",
       "title": "UAV Tech - Analog",
@@ -1048,7 +1066,7 @@
     },
     {
       "fullPath": "presets/4.3/other/Klystrom_Setup.txt",
-      "hash": "d0010d088d50df379d2b0ccb07c6be78c620551505018e5f0af86e7ad657c176",
+      "hash": "50a6d89271d5fb47f72c5315accc980fba0cb81d75a39e8232ecf5c277d425ec",
       "title": "Klystrom Setup 4.3",
       "firmware_version": [
         "4.3"
