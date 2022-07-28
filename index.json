@@ -1,4 +1,6 @@
 {
+  "majorVersion": 1,
+  "minorVersion": 0,
   "settings": {
     "MetapropertyDirective": "#$",
     "PresetCategories": {
@@ -8,11 +10,23 @@
       "VTX": "VTX",
       "LEDS": "LEDS",
       "MODES": "MODES",
-      "RC_SMOOTHING": "RC_SMOOTHING",
       "FILTERS": "FILTERS",
       "RC_LINK": "RC_LINK",
       "BNF": "BNF",
       "OTHER": "OTHER"
+    },
+    "PresetCategoriesPriorities": {
+      "TUNE": 1000000000000,
+      "RATES": 10000,
+      "OSD": 0,
+      "VTX": 1000000,
+      "LEDS": 0,
+      "MODES": 0,
+      "RC_SMOOTHING": 100000000,
+      "FILTERS": 100,
+      "RC_LINK": 10000000000,
+      "BNF": 0,
+      "OTHER": 0
     },
     "MetadataTypes": {
       "STRING": "STRING",
@@ -22,19 +36,27 @@
       "BOOLEAN": "BOOLEAN",
       "WORDS_ARRAY": "WORDS_ARRAY",
       "FILE_PATH_ARRAY": "FILE_PATH_ARRAY",
-      "PRESET_STATUS": "PRESET_STATUS"
+      "PRESET_STATUS": "PRESET_STATUS",
+      "PRIORITY": "PRIORITY",
+      "PARSER": "PARSER"
     },
     "OptionsDirectives": {
       "OPTION_DIRECTIVE": "option",
       "BEGIN_OPTION_DIRECTIVE": "option begin",
       "END_OPTION_DIRECTIVE": "option end",
       "OPTION_CHECKED": "(checked)",
-      "OPTION_UNCHECKED": "(unchecked)"
+      "OPTION_UNCHECKED": "(unchecked)",
+      "BEGIN_OPTION_GROUP_DIRECTIVE": "option_group begin",
+      "END_OPTION_GROUP_DIRECTIVE": "option_group end"
     },
     "PresetStatusEnum": [
       "OFFICIAL",
       "COMMUNITY",
       "EXPERIMENTAL"
+    ],
+    "ParserEnum": [
+      "TEXT",
+      "MARKED"
     ],
     "presetsDir": "presets",
     "presetsFileEncoding": "utf-8",
@@ -94,11 +116,24 @@
       "include_disclaimer": {
         "type": "FILE_PATH_ARRAY",
         "optional": true
+      },
+      "priority": {
+        "type": "PRIORITY",
+        "optional": true
+      },
+      "force_options_review": {
+        "type": "BOOLEAN",
+        "optional": true
+      },
+      "parser": {
+        "type": "PARSER",
+        "optional": true
       }
     }
   },
   "uniqueValues": {
     "firmware_version": [
+      "3.5",
       "4.2",
       "4.3"
     ],
@@ -110,187 +145,311 @@
       "OTHER",
       "RATES",
       "RC_LINK",
-      "RC_SMOOTHING",
       "TUNE",
       "VTX"
     ],
     "author": [
       "Alex Campbell (Chief)",
       "Alex Vanover",
-      "BMSThomas",
+      "AyyyKayyy - Anthony Knight",
       "Betaflight",
+      "BMSThomas",
+      "ctzsnooze",
+      "Daniel Appel / Tehllama",
       "Directory",
+      "DusKing1 (Hugo Chiang), Pitronic",
       "Evan Turner (Headsup)",
+      "Feisar",
+      "FPVian",
+      "Garban",
       "IllusionFpv",
       "Ivan Efimov (Limon)",
       "Joshua Bardwell",
+      "Justice - Gary Kent",
+      "Jye Smith",
       "KlystromFPV",
-      "Mark Spatz (UAV Tech)",
+      "KMfpv",
+      "LeadFingers",
       "MinChan Kim",
+      "mouseFPV",
+      "MrAlucardDante",
       "NemesisXB",
+      "Sjoer van der Ploeg",
+      "sugarK",
       "SupaflyFPV",
-      "ctzsnooze",
-      "sugarK"
+      "UAV Tech (Mark Spatz)"
     ],
     "keywords": [
-      "150hz",
-      "250hz",
-      "3 inch",
+      "\\\\GAS",
+      "111hz",
+      "150Hz",
+      "15Hz",
+      "166Hz",
+      "1S",
+      "20ms",
+      "250Hz",
+      "2in",
+      "2ms",
+      "2S",
+      "3 Inch",
+      "3.5in",
       "3\"",
+      "3in",
+      "3S",
+      "4in",
       "4S",
-      "5 inch",
+      "5 In",
+      "5 Inch",
       "5\"",
-      "500hz",
-      "50hz",
+      "500Hz",
+      "50Hz",
       "533",
+      "55Hz",
       "5in",
       "6 Inch",
       "6\"",
+      "65mm",
+      "666Hz",
+      "6in",
       "6S",
       "7 Inch",
       "7\"",
-      "AlexFPV",
-      "BMSThomas",
-      "CTZsoonze",
-      "Cgo",
-      "Chief",
-      "Crossfire",
-      "DShot telemetry",
-      "ELRS",
-      "EVO",
-      "GPS",
-      "HD",
-      "HD_freestyle",
-      "HDzero",
-      "HV",
-      "Headsup",
-      "IRC",
-      "IllusionFpv",
-      "KarateBrot",
-      "KlystromFPV",
-      "Limon",
-      "MinChan",
-      "MultiGP",
-      "OSD",
-      "OpenRacer",
-      "RPM",
-      "SA 2.0",
-      "SA 2.0 lite",
-      "SA 2.1",
-      "Supafly",
-      "SupaflyFPV",
-      "TBS",
-      "UAV Tech",
-      "VTX",
-      "\\\\GAS",
+      "7in",
+      "8\"",
+      "8in",
+      "8S",
+      "9\"",
+      "9in",
+      "9ms",
+      "acro",
+      "Acrobaix",
       "actual",
       "adjustments",
-      "aggressive",
+      "AlexFPV",
+      "analog",
+      "AOS",
+      "AOS T3",
+      "Audio TBS",
       "aux",
+      "AyyyKayyy",
+      "bando",
       "bardwell",
+      "basher",
       "basic",
       "betaflight",
       "blackbox",
+      "BMI270",
+      "BMSThomas",
+      "brushless",
       "camera",
       "camera_control",
-      "cfv2",
-      "cfv3",
+      "Cgo",
+      "Chief",
+      "cinelifter",
       "cinematic",
+      "cinewhoop",
       "clean",
       "clear",
+      "Configure",
       "control",
+      "Crossfire",
+      "CRSF",
       "ctzsnooze",
+      "CTZsoonze",
+      "DDC",
       "default",
       "defaults",
       "diatone",
+      "Digipick",
+      "digital",
       "disable",
       "divimath",
-      "dynamic",
+      "DJI",
+      "DShot telemetry",
+      "dual",
+      "E7082VM",
+      "eachine",
+      "ELRS",
+      "emax",
+      "EVO",
       "expert",
+      "express",
+      "feisar",
       "filter",
       "filtering",
       "filters",
       "five33",
+      "FPVCycle",
+      "FPVCycle TP3",
+      "fpvian",
       "freedom",
       "freedom spec",
+      "FreedomSpec",
       "freestyle",
-      "freestyle_HD",
       "freesytle",
+      "freetyle",
       "frsky",
+      "Garban",
+      "ghost",
+      "GHST",
+      "GoPro",
+      "GPS",
+      "GTB339",
+      "gyro",
+      "gyroflow",
+      "gyros",
+      "gyroscope",
+      "HD",
+      "HDzero",
+      "Headsup",
+      "HighKV",
       "hot",
-      "jitter",
+      "HV",
+      "IllusionFpv",
+      "immersion",
+      "immersionRC",
+      "IRC",
+      "IRC Tramp",
+      "justice",
       "karate",
+      "KarateBrot",
       "klystrom",
+      "KlystromFPV",
       "launch",
       "launch_mode",
+      "LeadFingers",
+      "League",
       "leds",
+      "Limon",
       "link",
+      "Llama",
       "log",
       "logging",
+      "Long Range",
       "mamba",
+      "meteor",
+      "MinChan",
       "mode",
       "modes",
+      "Motor",
+      "mouse fpv",
+      "Multi",
+      "MultiGP",
+      "MultiVoltage",
       "names",
       "nano",
+      "nanohawk",
       "no rpm",
       "noisy",
       "normal",
+      "OP400",
+      "OpenRacer",
+      "OpenVTx",
+      "OSD",
+      "output limit",
+      "OVX300",
+      "OVX303",
       "partial",
+      "Passthrough",
       "pid",
+      "PIDtoolbox",
       "pro32",
       "profile",
+      "Pure Race",
       "quaddiction",
       "quick",
       "race",
       "race rates ctzsnooze actual",
+      "race v1",
+      "race v2",
+      "Race250",
+      "Race500",
       "racing",
       "rates",
-      "rc",
+      "RC",
       "rc link",
-      "rc smoothing",
       "rc_link",
       "rc_smoothing",
+      "Redpine",
       "reset",
       "reset statistics",
+      "RPM",
       "rush",
       "rush tank",
       "rushfpv",
       "russia",
+      "Rx",
+      "sa",
+      "SA 2.0",
+      "SA 2.0 lite",
+      "SA 2.1",
+      "sa2.0",
+      "sa20",
+      "Safe",
       "sbus",
+      "SBUS fast",
+      "settings",
       "setup",
       "shames",
-      "shark bite",
-      "smooth",
+      "Smart",
+      "smart audio",
+      "smartaudio",
       "smoothing",
+      "Solid250",
       "some",
-      "spec",
+      "Spec",
       "speedybee",
       "stats",
+      "Street",
+      "Street League",
+      "StreetLeague",
       "suagrK",
+      "sub 250",
       "sugarK",
+      "Supafly",
+      "SupaflyFPV",
       "switch",
+      "SWPR",
+      "T3",
       "tank solo",
       "tank ultimate",
-      "texas",
+      "TBS",
+      "tbs sa",
+      "Team Black Sheep",
+      "Texas",
+      "Throttle cap",
       "tiny",
       "tiny tank",
-      "tinyTrainer",
-      "tracer",
+      "TinyTrainer",
+      "toothpic",
+      "Toothpick",
+      "Tracer",
       "trainer",
       "tramp",
-      "transition",
-      "tune",
+      "transmitter",
+      "Tune",
+      "twig",
+      "tx5m.1",
       "tx800",
       "ultra",
       "ultra 1000",
+      "ultralite",
       "unify",
       "unify pro",
+      "utility",
       "vanover",
       "very",
       "very clean",
       "very noisy",
+      "viper",
+      "viper lite",
+      "Voltage",
+      "VTX",
       "vtx table",
       "vtxtable",
+      "whoop",
+      "whoop lite",
+      "whooptopia",
       "world champion",
       "youtube"
     ]
@@ -298,8 +457,7 @@
   "presets": [
     {
       "fullPath": "presets/4.3/filters/ctzsnooze_race.txt",
-      "hash": "505a3cf9aff8fc6b861770d3bcafcb61431e2865f3fa10170f8c5cc044b5fea1",
-      "options": [],
+      "hash": "751a6f316eb81fd94215291eb35b719cc52d9ca66baa53668d495f8351e1156c",
       "title": "ctzsnooze's race filter settings",
       "firmware_version": [
         "4.3"
@@ -314,18 +472,11 @@
         "RPM"
       ],
       "author": "Betaflight",
-      "description": [
-        "ctzsnooze's standard race filter setup.",
-        "Requires RPM filtering and DShot telemetry!"
-      ],
-      "include": [
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "priority": 100
     },
     {
       "fullPath": "presets/4.3/filters/defaults.txt",
-      "hash": "cd9af0626bc1e8be0738e39995b8d77b0494ee78b83815d4dab261d66c5ae5fd",
-      "options": [],
+      "hash": "365d91285f53f2ad0a1521a158d498840143f2d566d511397ab19f2f402a920e",
       "title": "Default 4.3 Filter settings",
       "firmware_version": [
         "4.3"
@@ -339,14 +490,11 @@
         "reset"
       ],
       "author": "Betaflight",
-      "description": [
-        "Resets Filter settings to 4.3 defaults"
-      ]
+      "priority": 100
     },
     {
       "fullPath": "presets/4.3/filters/default_no_rpm_clean.txt",
       "hash": "a49b93320ce1ae4503a2e43061fd00b7fad70ad6d44acb4d97e040163eb72419",
-      "options": [],
       "title": "4.3 Filter settings for CLEAN build WITH NO RPM FILTERING.",
       "firmware_version": [
         "4.3"
@@ -364,20 +512,11 @@
         "betaflight"
       ],
       "author": "Betaflight",
-      "description": [
-        "WARNING: Too much filtering may cause wobbling.",
-        "Intended for solid frames, motors with good bearings and clean props.",
-        "If motors get hot, try lowering the gyro or D filter sliders.   If motors remain hot despite strong filtering, it may not be a filtering problem.",
-        "If motors grind or make noise at idle, lower the D filter slider."
-      ],
-      "include": [
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "priority": 100
     },
     {
       "fullPath": "presets/4.3/filters/default_no_rpm_noisy.txt",
       "hash": "04de8d94400cc218d57ff0896cdce43c3784ddd2c5b65381631b13a7dc09cc88",
-      "options": [],
       "title": "4.3 Filter settings for NOISY build WITH NO RPM FILTERING.",
       "firmware_version": [
         "4.3"
@@ -395,19 +534,11 @@
         "betaflight"
       ],
       "author": "Betaflight",
-      "description": [
-        "Intended for slightly beaten up, or larger (7\" and above), builds.",
-        "If motors get hot, try a filter set for very noisy motors, or try lowering the D filter slider.",
-        "If motors grind or make noise at idle, lower the D filter slider."
-      ],
-      "include": [
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "priority": 100
     },
     {
       "fullPath": "presets/4.3/filters/default_no_rpm_normal.txt",
       "hash": "d7d779631e27f231832409940c0f61cd8408a01acc578166f449999440e602e5",
-      "options": [],
       "title": "4.3 Filter settings for NORMAL build WITH NO RPM FILTERING.",
       "firmware_version": [
         "4.3"
@@ -425,19 +556,11 @@
         "betaflight"
       ],
       "author": "Betaflight",
-      "description": [
-        "Intended for a well maintained build in good condition.",
-        "If motors get hot, try a filter set for noisy or very noisy motors, or try lowering the D filter slider.",
-        "If motors grind or make noise at idle, lower the D filter slider."
-      ],
-      "include": [
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "priority": 100
     },
     {
       "fullPath": "presets/4.3/filters/default_no_rpm_very_clean.txt",
       "hash": "fc2bcbbae89d4c42d459d16938c20a80fc8d541123e37e7dcad89c5756b3241a",
-      "options": [],
       "title": "4.3 Filter settings for VERY CLEAN build WITHOUT RPM FILTERING.",
       "firmware_version": [
         "4.3"
@@ -457,20 +580,11 @@
         "betaflight"
       ],
       "author": "Betaflight",
-      "description": [
-        "WARNING: Likely to cause motor overheating on many builds!",
-        "Intended only for rock hard frames, motors with good bearings and true shafts, and perfectly balanced props.",
-        "If motors get hot, try a filter set for clean or normal motors, or try enabling gyro filter slider.",
-        "If motors grind or make noise at idle, lower the D filter slider."
-      ],
-      "include": [
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "priority": 100
     },
     {
       "fullPath": "presets/4.3/filters/default_no_rpm_very_noisy.txt",
       "hash": "e742664e14b7a69434cb235205151942ef7f93b09695ecae70d9790141e7590a",
-      "options": [],
       "title": "4.3 Filter settings for VERY NOISY build WITH NO RPM FILTERING.",
       "firmware_version": [
         "4.3"
@@ -489,19 +603,11 @@
         "betaflight"
       ],
       "author": "Betaflight",
-      "description": [
-        "Intended for slightly beaten up, or larger (10\" and above), builds.",
-        "If motors get hot, they may simply be being asked to do too much.",
-        "May cause 5\" or smaller quads to wobble due to lag."
-      ],
-      "include": [
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "priority": 100
     },
     {
       "fullPath": "presets/4.3/filters/default_rpm_clean.txt",
-      "hash": "7d63ae8fc0c23d33d068667a7ffb5755aafcea2ab3acaf675924c9b21a6786fe",
-      "options": [],
+      "hash": "74245724c57bb8e839d05a92110150515350060cf71c3a28b37e83cc61569456",
       "title": "4.3 Filter settings for CLEAN build with RPM FILTERING.",
       "firmware_version": [
         "4.3"
@@ -519,21 +625,11 @@
         "betaflight"
       ],
       "author": "Betaflight",
-      "description": [
-        "WARNING: Required RPM filtering.  Ensure that DShot Telemetry is working properly!",
-        "WARNING: May cause motor overheating!",
-        "Intended for solid frames, motors with good bearings and clean props.",
-        "If motors get hot, try a filter set for normal or noisy motors.",
-        "If motors grind or make noise at idle, lower the D filter slider."
-      ],
-      "include": [
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "priority": 100
     },
     {
       "fullPath": "presets/4.3/filters/default_rpm_noisy.txt",
       "hash": "d2f73d2aa33cbbc2829ec7331b779a1f0f25608b7e6fe1539525d4078bd462b6",
-      "options": [],
       "title": "4.3 Filter settings for NOISY build with RPM FILTERING.",
       "firmware_version": [
         "4.3"
@@ -551,20 +647,11 @@
         "betaflight"
       ],
       "author": "Betaflight",
-      "description": [
-        "WARNING: Ensure that DShot Telemetry is working properly!",
-        "Intended for slightly beaten up, or larger (7\" and above), builds.",
-        "If motors get hot, try the filter Preset for very noisy motors.",
-        "If motors grind or make noise at idle, lower the D filter slider."
-      ],
-      "include": [
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "priority": 100
     },
     {
       "fullPath": "presets/4.3/filters/default_rpm_normal.txt",
       "hash": "514677251d86ed5f7894e61fabbb8449f74a53efda71ceff6caa0a2f86acc16c",
-      "options": [],
       "title": "4.3 Filter settings for NORMAL build with RPM FILTERING.",
       "firmware_version": [
         "4.3"
@@ -582,20 +669,11 @@
         "betaflight"
       ],
       "author": "Betaflight",
-      "description": [
-        "Intended for a well maintained build in good condition with RPM filtering.",
-        "WARNING: Ensure that DShot Telemetry is working properly!",
-        "If motors get hot, try a filter set for noisy or very noisy motors.",
-        "If motors grind or make noise at idle, lower the D filter slider."
-      ],
-      "include": [
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "priority": 100
     },
     {
       "fullPath": "presets/4.3/filters/default_rpm_very_clean.txt",
       "hash": "148d14351390490e81f7f868afff72a8252e35bdd294bfa9da983eb34b293490",
-      "options": [],
       "title": "4.3 Filter settings for VERY CLEAN build with RPM FILTERING.",
       "firmware_version": [
         "4.3"
@@ -615,21 +693,11 @@
         "betaflight"
       ],
       "author": "Betaflight",
-      "description": [
-        "WARNING: Ensure that DShot Telemetry is working properly!",
-        "WARNING: Likely to cause motor overheating on many builds!",
-        "Intended only for rock hard frames, motors with good bearings and true shafts, and perfectly balanced props.",
-        "If motors get hot, try a filter set for clean or normal motors.",
-        "If motors grind or make noise at idle, lower the D filter slider."
-      ],
-      "include": [
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "priority": 100
     },
     {
       "fullPath": "presets/4.3/filters/default_rpm_very_noisy.txt",
       "hash": "f9eb86fb1d3d334e8647621a847d08a38ff781860a0f15632f485ff11fe0d117",
-      "options": [],
       "title": "4.3 Filter settings for VERY NOISY build with RPM FILTERING.",
       "firmware_version": [
         "4.3"
@@ -650,21 +718,56 @@
         "betaflight"
       ],
       "author": "Betaflight",
-      "description": [
-        "WARNING: Requires RPM filtering - ensure that DShot Telemetry is working properly!",
-        "WARNING: Too much filtering may cause wobbling.",
-        "Intended for worn, beaten up, or larger (10\" and above), builds.",
-        "If motors remain hot despite strong filtering, it may not be a filtering problem.",
-        "If motors grind or make noise at idle, lower the D filter slider."
+      "priority": 100
+    },
+    {
+      "fullPath": "presets/4.3/filters/dusking_BMI270.txt",
+      "hash": "0dd77e8e1baed07019f836352818d0b8eccb1125f5123511cc25cb0118591a8d",
+      "title": "DusKing's BMI270 filter settings",
+      "firmware_version": [
+        "4.3"
       ],
-      "include": [
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "category": "FILTERS",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "BMI270",
+        "filter",
+        "filters",
+        "gyroscope",
+        "gyro",
+        "gyros",
+        "settings",
+        "RPM"
+      ],
+      "author": "DusKing1 (Hugo Chiang), Pitronic",
+      "priority": 100
+    },
+    {
+      "fullPath": "presets/4.3/filters/dusking_BMI270_dual.txt",
+      "hash": "359a3d4d5391cb3c30bec79cc00db8dbb39de19c587bd8584930c1d21e06cb3e",
+      "title": "DusKing's dual BMI270 filter settings",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "FILTERS",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "BMI270",
+        "filter",
+        "filters",
+        "dual",
+        "gyroscope",
+        "gyro",
+        "gyros",
+        "settings",
+        "RPM"
+      ],
+      "author": "DusKing1 (Hugo Chiang), Pitronic",
+      "priority": 100
     },
     {
       "fullPath": "presets/4.3/filters/karate_array.txt",
       "hash": "7d4913bf9839cc9bb055ab942a22c3c015a2f258e30633a07edcaaf98eb85df0",
-      "options": [],
       "title": "the Karate array",
       "firmware_version": [
         "4.3"
@@ -683,24 +786,11 @@
         "5\""
       ],
       "author": "sugarK",
-      "description": [
-        "the Karate fitler array as developed by @CTZsoonze and @sugarK for 4.3 using @karateBrot's rpm cross fade code.",
-        "NOTE this needs bidirectional Dshot support and RPM filtering active to use. DO NOT ATEMPT TO USE WITH OUT RPM FILTERING!",
-        "This filtering array will work with most 5\" race and freesytle builds that have a solid airframe and motors in good condition.",
-        "Follow the usual process of hover testing and safely checking out your tune before using. USE AT YOUR OWN RISK."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/51",
-      "include_warning": [
-        "misc/warnings/en/rpm_filters.txt"
-      ],
-      "include": [
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "priority": 100
     },
     {
       "fullPath": "presets/4.3/filters/Klystrom_clean_F4.txt",
       "hash": "8c88c7d3d098864e776ce6aab8cd29dd6fdef0c7157568fc120513747c3636d6",
-      "options": [],
       "title": "Klystrom Clean Build F4",
       "firmware_version": [
         "4.3"
@@ -715,14 +805,11 @@
         "clean"
       ],
       "author": "KlystromFPV",
-      "description": [
-        "For clean builds, very little filtering. Using F4 with Bidirectional DSHOT. For F4, FC should be running 4K PID loop which requires a static LPF of 500Hz to remove aliasing issues."
-      ]
+      "priority": 100
     },
     {
       "fullPath": "presets/4.3/filters/Klystrom_clean_F7.txt",
       "hash": "d90df864c6ca60a4bdcbb75cf53065b728eae9976b045b42988af8410402526f",
-      "options": [],
       "title": "Klystrom Clean Build F7",
       "firmware_version": [
         "4.3"
@@ -737,14 +824,11 @@
         "clean"
       ],
       "author": "KlystromFPV",
-      "description": [
-        "For clean builds, very little filtering. Using F7 with Bidirectional DSHOT."
-      ]
+      "priority": 100
     },
     {
       "fullPath": "presets/4.3/leds/defaults.txt",
       "hash": "c1dc1b69bd7b001253f05b56f3f6c3d60e93615c718f30a3b815846f445d1f6c",
-      "options": [],
       "title": "Default 4.3 LED settings",
       "firmware_version": [
         "4.3"
@@ -757,15 +841,11 @@
         "leds"
       ],
       "author": "Betaflight",
-      "description": [
-        "Resets LED settings to 4.3 defaults",
-        "Options: LED, colour or mode_color resets."
-      ]
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/modes/defaults.txt",
       "hash": "16a19e27a46efcd9f86d56f17e8fe82356921399cc0c5502e257e33ef8c321c3",
-      "options": [],
       "title": "Default 4.3 Modes and Adjustment settings",
       "firmware_version": [
         "4.3"
@@ -782,14 +862,11 @@
         "switch"
       ],
       "author": "Betaflight",
-      "description": [
-        "Resets modes and adjustment ranges to 4.3 defaults"
-      ]
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/modes/Klystrom_vtx_pit_mode.txt",
       "hash": "0c04855b490b2f32cab7f40fa899b9ac9b4391d5d1ebc85ffd9ea4ac2ad43fb5",
-      "options": [],
       "title": "Klystrom Modes VTX PitMode",
       "firmware_version": [
         "4.3"
@@ -806,14 +883,11 @@
         "VTX"
       ],
       "author": "KlystromFPV",
-      "description": [
-        "My modes configuration if VTX on/off is not available at FC. If not \"turned ON\", VTX shall be at PitMode."
-      ]
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/modes/Klystrom_vtx_toggle.txt",
       "hash": "13ed047753d437bf2269181c38c31389b03a4642292147de756b0e4545739da6",
-      "options": [],
       "title": "Klystrom Modes with VTX ON/OFF",
       "firmware_version": [
         "4.3"
@@ -830,14 +904,11 @@
         "VTX"
       ],
       "author": "KlystromFPV",
-      "description": [
-        "My modes configuration if VTX on/off is available at FC"
-      ]
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/osd/defaults.txt",
       "hash": "36eb8ae097d0362030b297477c971280aad5562ac512a3f7ffa91949ed56db82",
-      "options": [],
       "title": "Default 4.3 OSD settings",
       "firmware_version": [
         "4.3"
@@ -850,14 +921,11 @@
         "OSD"
       ],
       "author": "Betaflight",
-      "description": [
-        "Resets the OSD values back to Betaflight 4.3 defaults"
-      ]
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/osd/Klystrom_freestyle.txt",
       "hash": "ecc984384dabd24c6533baf6b36601fb7dc4c943501ed3a8a1dca8ff973713a6",
-      "options": [],
       "title": "KlystromFPV Freestyle OSD",
       "firmware_version": [
         "4.3"
@@ -871,63 +939,57 @@
         "freestyle"
       ],
       "author": "KlystromFPV",
-      "description": [
-        "Freestyle OSD"
-      ]
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/osd/UAV_tech_Analog.txt",
+      "hash": "b304bd4f3d0e6ab42840badced7e07847ca654c5fd048dba8c53b96128788763",
+      "title": "UAV Tech - Analog",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "OSD",
+      "status": "COMMUNITY",
+      "keywords": [
+        "analog"
+      ],
+      "author": "UAV Tech (Mark Spatz)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/osd/UAV_tech_DJI.txt",
+      "hash": "bc8e6e7c6811e7dc0c3dce503795e6ac263471b78de444c56c9bdb6dfc1c1821",
+      "title": "UAV Tech - DJI",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "OSD",
+      "status": "COMMUNITY",
+      "keywords": [
+        "DJI"
+      ],
+      "author": "UAV Tech (Mark Spatz)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/osd/UAV_tech_DJI_GPS.txt",
+      "hash": "71aa3f012c239248629894e48e5ce5d7e83fc4c4b3e6e166d835a73b8e8588e7",
+      "title": "UAV Tech - DJI with GPS",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "OSD",
+      "status": "COMMUNITY",
+      "keywords": [
+        "DJI",
+        "GPS"
+      ],
+      "author": "UAV Tech (Mark Spatz)",
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/other/blackbox_disable.txt",
       "hash": "71fc4b4cc44366fbbd91ad1aaf882cddd103fae91c4230988a5ebbb67b6bac5d",
-      "options": [
-        {
-          "name": "Disable PID data",
-          "checked": false
-        },
-        {
-          "name": "Disable RC data",
-          "checked": false
-        },
-        {
-          "name": "Disable SETPOINT data",
-          "checked": false
-        },
-        {
-          "name": "Disable BATTERY data",
-          "checked": false
-        },
-        {
-          "name": "Disable MAGNETOMETER data",
-          "checked": false
-        },
-        {
-          "name": "Disable ALTIMETER data",
-          "checked": false
-        },
-        {
-          "name": "Disable RSSI data",
-          "checked": false
-        },
-        {
-          "name": "Disable GYRO data",
-          "checked": false
-        },
-        {
-          "name": "Disable ACCELEROMETER data",
-          "checked": false
-        },
-        {
-          "name": "Disable DEBUG data",
-          "checked": false
-        },
-        {
-          "name": "Disable MOTOR data",
-          "checked": false
-        },
-        {
-          "name": "Disable GPS data",
-          "checked": false
-        }
-      ],
       "title": "4.3 Blackbox disable settings",
       "firmware_version": [
         "4.3"
@@ -942,18 +1004,51 @@
         "sugarK"
       ],
       "author": "sugarK",
-      "description": [
-        "Allows you to disable certain blackbox data fields to save space and CPU resources"
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/other/ELRS_Passthrough.txt",
+      "hash": "fcee0c30a390f30b0ef92dbba0cc15285674d4c9fdab23a0b469753d2efeaa9a",
+      "title": "ExpressLRS Passthrough Betaflight Settings",
+      "firmware_version": [
+        "3.5",
+        "4.2",
+        "4.3"
       ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/110",
-      "include": [
-        "presets/4.3/other/reset_blackbox.txt"
-      ]
+      "status": "OFFICIAL",
+      "category": "OTHER",
+      "keywords": [
+        "ELRS",
+        "Passthrough",
+        "Configure",
+        "utility"
+      ],
+      "author": "Daniel Appel / Tehllama",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/other/gyroflow_min_blackbox.txt",
+      "hash": "15c71e564d549b8e3abd80026c83ff17241606137af32dd5a7b6f42ee228cc4c",
+      "title": "Gyroflow minimum settings",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "OTHER",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "gyroflow",
+        "blackbox",
+        "log",
+        "DDC",
+        "Acrobaix",
+        "Garban"
+      ],
+      "author": "Garban",
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/other/Klystrom_Setup.txt",
       "hash": "d0010d088d50df379d2b0ccb07c6be78c620551505018e5f0af86e7ad657c176",
-      "options": [],
       "title": "Klystrom Setup 4.3",
       "firmware_version": [
         "4.3"
@@ -966,14 +1061,11 @@
         "setup"
       ],
       "author": "KlystromFPV",
-      "description": [
-        "Misc stuff that I usually configure in my quad"
-      ]
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/other/reset_blackbox.txt",
       "hash": "30dc088a9a24dbbbea774d4d23eb29be85da9f4a78844e23e8b4ae7ff49bd090",
-      "options": [],
       "title": "Reset 4.3 Blackbox settings",
       "firmware_version": [
         "4.3"
@@ -988,14 +1080,11 @@
         "log"
       ],
       "author": "Betaflight",
-      "description": [
-        "Resets the 4.3 blackbox settings back to defaults."
-      ]
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/other/reset_camera_control.txt",
       "hash": "837147e19b29bed6e3d6ab21d7d9bd291f8b38f9a378bd9b2ba075be7275fb0a",
-      "options": [],
       "title": "Reset Camera Control settings",
       "firmware_version": [
         "4.3"
@@ -1011,19 +1100,11 @@
         "camera_control"
       ],
       "author": "Betaflight",
-      "description": [
-        "Resets the Camera Control settings to 4.3 defaults"
-      ]
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/other/reset_gps.txt",
       "hash": "08a6638077cc4246ea23e7bfbb9d4759b31c0243a0f326b7379270039bd3a773",
-      "options": [
-        {
-          "name": "enable GPS?",
-          "checked": false
-        }
-      ],
       "title": "Reset GPS settings",
       "firmware_version": [
         "4.3"
@@ -1036,15 +1117,11 @@
         "GPS"
       ],
       "author": "Betaflight",
-      "description": [
-        "Resets the GPS settings to 4.3 defaults",
-        "Optionally enable GPS feature, default is off"
-      ]
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/other/reset_launch_mode.txt",
       "hash": "e4a11824ea2e2426160e68a161ffc15ecb2f6d2436aeb84d76967c86f11ed491",
-      "options": [],
       "title": "Reset Launch Mode settings",
       "firmware_version": [
         "4.3"
@@ -1059,19 +1136,11 @@
         "launch_mode"
       ],
       "author": "Betaflight",
-      "description": [
-        "Resets the Launch Mode settings to 4.3 defaults"
-      ]
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/other/reset_names.txt",
       "hash": "84a26fc8b78aefb8e4a9b0c01684ea8d207b35d0332edc3118885d60854a18c9",
-      "options": [
-        {
-          "name": "reset profile 1 name?",
-          "checked": true
-        }
-      ],
       "title": "Reset 4.3 Names",
       "firmware_version": [
         "4.3"
@@ -1085,14 +1154,11 @@
         "profile"
       ],
       "author": "Betaflight",
-      "description": [
-        "Resets the craft names and optionally resets profile names"
-      ]
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/other/reset_servo.txt",
       "hash": "4b54c73d5472a403fc0f15ebcef2951ada94a5b5ecd5111c31e7f1ee494d00ec",
-      "options": [],
       "title": "Reset 4.3 Stats",
       "firmware_version": [
         "4.3"
@@ -1105,14 +1171,11 @@
         "stats"
       ],
       "author": "Betaflight",
-      "description": [
-        "Resets the 4.3 servo settings back to defaults"
-      ]
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/other/reset_stats.txt",
       "hash": "557798e6885b64e7f3a238fc9d22ae3c61300b3d977c113ef14a4d74f38f0a84",
-      "options": [],
       "title": "Reset 4.3 Stats",
       "firmware_version": [
         "4.3"
@@ -1125,19 +1188,122 @@
         "stats"
       ],
       "author": "Betaflight",
-      "description": [
-        "Resets the saved flight stats values back to zero"
-      ]
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/other/Street_League_motor_outputs.txt",
+      "hash": "57233ef94c4cc27d3ad2ad546ef7e4d105dd09b27e2230cb9a7885a949e83dc7",
+      "title": "Street League Motor Output Limit Settings",
+      "firmware_version": [
+        "4.2",
+        "4.3"
+      ],
+      "category": "OTHER",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "Motor",
+        "output limit",
+        "Street League",
+        "StreetLeague",
+        "Street",
+        "League",
+        "LeadFingers",
+        "Throttle cap"
+      ],
+      "author": "LeadFingers",
+      "force_options_review": true,
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/other/Tehllama_5in_1900-2250KV_FreedomSpec_3S-5S-6S_Race_TUNE_OTHER.txt",
+      "hash": "f5e7a8cd279672a7585497d0af78bd6416e145f036db50f7a655fc9d70645777",
+      "title": "5in FreedomSpec Race Tune 1900-2250KV on 3S (Spec) and 5S/6S (Open)",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "OTHER",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "533",
+        "FreedomSpec",
+        "Tune",
+        "Spec",
+        "Race",
+        "Llama",
+        "MultiVoltage"
+      ],
+      "author": "Daniel Appel / Tehllama",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/other/Tehllama_5in_2350-2750KV-TexasSpec_3S-4S-5S_Race_TUNE_OTHER.txt",
+      "hash": "5d6ed6b44c881d82559867dac445f89fe0f1e6cca98683740741bd91261d7aa2",
+      "title": "5in TexasSpec Freedom Race Tune 2350-2750KV on 3S (Spec) and 4S/5S (Open)",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "OTHER",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "533",
+        "HighKV",
+        "FreedomSpec",
+        "Spec",
+        "Tune",
+        "Race",
+        "Llama",
+        "MultiVoltage",
+        "Texas"
+      ],
+      "author": "Daniel Appel / Tehllama",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/other/Tehllama_5in_BMS-Spec_1600-2350KV_4S-5S-6S_Race_TUNE-OTHER.txt",
+      "hash": "26f49dea7894c55dfffffadaac1eadd98ed8ad6ad57ae3177e2667d9f4cec4fe",
+      "title": "5in Tehllama Race Tune 1600-2350KV on 4S/5S/6S including BMS Spec",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "OTHER",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "Race",
+        "Llama",
+        "Safe",
+        "Tune",
+        "MultiVoltage"
+      ],
+      "author": "Daniel Appel / Tehllama",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/other/Tehllama_GTB339_3in_SWPR-Spec_2S-3S_Race_TUNE_OTHER.txt",
+      "hash": "48993de1d96b0347b5ff6d8f0b79e9deb88a81ef9341d17c670f62fc56bfc709",
+      "title": "3in Lightweight 3S/2S Tune for GTB-339 or 3\" Racing Toothpick",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "OTHER",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "GTB339",
+        "Toothpick",
+        "Spec",
+        "Race",
+        "Llama",
+        "SWPR",
+        "Multi",
+        "Voltage",
+        "2S",
+        "3S"
+      ],
+      "author": "Daniel Appel / Tehllama",
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/rates/Bardwell.txt",
       "hash": "fe0db350b5775b7b2ceaf54ce51ddaef1b3f813e707e09c127943bc07c1d1f92",
-      "options": [
-        {
-          "name": "Actual rates analogue",
-          "checked": false
-        }
-      ],
       "title": "Joshua Bardwell rates",
       "firmware_version": [
         "4.3"
@@ -1150,25 +1316,11 @@
         "freestyle"
       ],
       "author": "Joshua Bardwell",
-      "description": [
-        "Freestyle rates with 907 deg/sec for roll/pitch and 800 deg/sec for yaw. Relatively smooth around the sticks middle.",
-        "I am Joshua Bardwell and you gonna learn something today!",
-        "Joshua Bardwell - one of the most famous YouTubers in FPV. From thorough gear reviews, to tons of videos about drone building and tuning, his videos have helped get many pilots into the air. People love him for his ability to give simple explanations for difficult and technical issues in FPV."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/94",
-      "include": [
-        "presets/4.3/rates/defaults.txt"
-      ]
+      "priority": 10000
     },
     {
       "fullPath": "presets/4.3/rates/BMSThomas.txt",
       "hash": "b7475cbcf6113cc01385f282c8d85bfee258cc7256aabdb9d995fcbaa6304cb5",
-      "options": [
-        {
-          "name": "Throttle curve",
-          "checked": false
-        }
-      ],
       "title": "BMSThomas racing/freestyle rates",
       "firmware_version": [
         "4.3"
@@ -1182,19 +1334,11 @@
         "MultiGP"
       ],
       "author": "BMSThomas",
-      "description": [
-        "Racing and freestyle rates by BMSThomas - MultiGP International Open 2019 champion.",
-        "ACTUAL rates with 720 degrees/sec max."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/10",
-      "include": [
-        "presets/4.3/rates/defaults.txt"
-      ]
+      "priority": 10000
     },
     {
       "fullPath": "presets/4.3/rates/CGo.txt",
       "hash": "0dfc7151103bda6cae83aa843512857906e31fb16ba408c11cc7840a34c8ebf8",
-      "options": [],
       "title": "CGo race rates",
       "firmware_version": [
         "4.3"
@@ -1209,24 +1353,11 @@
         "Cgo"
       ],
       "author": "sugarK",
-      "description": [
-        "Racing rates from Chris Go (Cgo), fastest pilot in NSW Australia and leader of the Quaddiction krew.",
-        "lols and yes he still uses BETAFLIGHT rates"
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/84",
-      "include": [
-        "presets/4.3/rates/defaults.txt"
-      ]
+      "priority": 10000
     },
     {
       "fullPath": "presets/4.3/rates/Chief.txt",
       "hash": "91a2eb51e96dae61376a4b218476c024ff8410c697af7252060dbf880a6c020d",
-      "options": [
-        {
-          "name": "Actual rates analogue",
-          "checked": false
-        }
-      ],
       "title": "Chief race/freestyle rates",
       "firmware_version": [
         "4.3"
@@ -1242,20 +1373,11 @@
         "freestyle"
       ],
       "author": "Alex Campbell (Chief)",
-      "description": [
-        "Racing and freestyle rates by Alex Campbell - Chief (Alex FPV).",
-        "This is a modification of the famous 533 rates: 533 deg/sec for roll and pitch, but 350 deg/sec for yaw.",
-        "Alex - 2021 DRL Pilot, 3 years DCL Veteran including 2 podium finishes in 2018/2020. Heart of America team member: 2020 Master Of Mayhem, 2021 IO Team Racing Champion."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/93",
-      "include": [
-        "presets/4.3/rates/defaults.txt"
-      ]
+      "priority": 10000
     },
     {
       "fullPath": "presets/4.3/rates/ctzsnooze_race.txt",
-      "hash": "36263af4495e625beae1ae6490a0cacc723525ec3bcbbe8f9c4d0b7699f4bbbb",
-      "options": [],
+      "hash": "c580ff16eac1b602195f1194caff3da0476d55c9bc7e527f7b0ba8b67774c24b",
       "title": "race rates by ctzsnooze",
       "firmware_version": [
         "4.3"
@@ -1266,20 +1388,11 @@
         "race rates ctzsnooze actual"
       ],
       "author": "ctzsnooze",
-      "description": [
-        "Race rates by ctzsnooze.",
-        "ACTUAL rates with 650 deg/s max, 150 centre, no expo.",
-        "Chris Thompson (ctzsnooze) - grey eminence of Betaflight and one of the biggest influencers on Betaflight and on how all modern acro drones fly these days. He is also the most experienced blackbox reviewer. Feel free to check out Facebook group: Betaflight BlackBox Log Review."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/97",
-      "include": [
-        "presets/4.3/rates/defaults.txt"
-      ]
+      "priority": 10000
     },
     {
       "fullPath": "presets/4.3/rates/defaults.txt",
-      "hash": "968bc57fcba5bba104bddbb2f22892c503b95eabcf87b7b747d7c0ad32cbfa0b",
-      "options": [],
+      "hash": "9d063433102e8340d3d0ad396f6dc998c7030c0b9ecc4bb2a6c5b86a5def07fe",
       "title": "Default rates",
       "firmware_version": [
         "4.3"
@@ -1292,17 +1405,11 @@
         "actual"
       ],
       "author": "Betaflight",
-      "description": [
-        "Default Betaflight rates - ACTUAL",
-        "Will be applied for the currently selected rate profile",
-        "TPA values are not included",
-        "Throttle limit and curve are not included"
-      ]
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/rates/Directory_freestyle.txt",
       "hash": "2478b869e459450024e482488d4fa3103528d449db747f48e2e873eb18d77a9c",
-      "options": [],
       "title": "Directory freestyle rates",
       "firmware_version": [
         "4.3"
@@ -1313,24 +1420,47 @@
         "freestyle"
       ],
       "author": "Directory",
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/73",
-      "description": [
-        "The freestyle rates that I, Directory, have gotten used to for both acro and 3D.",
-        "The pitch and roll have a similar max rate (780, 860) with roll being slightly faster. I prefer a fast max rate to be able to do snappy barrel-roll/flips in a split second. The reason that both the pitch and roll axis are so similar is that when doing a roll you do not lose visibility therefor feeling more comfortable and can decelerate the roll in time without overshooting with enough practice. With front/back flips however you lose visibility with the ground which puts you in a state of anxiety wondering how close you are to the ground and if you are going to hit it. With the pitch max rate being almost just as fast as the roll you can reasonably predict for how long full stick deflection is neccasary and have confidance you won't lose much altitude. The pitch curve however is less linier than the roll offering tons of resolution in the middle. This is because during flight pitch is very rarely adjusted so the maximum amount of control is allowed to maintain a steady altitude. This does not get in the way of full stick deflection when doing a snap maneuver. Yaw curve is relativly predictable with a high max rate to be able to do quick spins/lookbacks."
+      "priority": 10000
+    },
+    {
+      "fullPath": "presets/4.3/rates/Feisar_freestyle.txt",
+      "hash": "e5ecd4c804d9c099c7c8b99c386e484d8bffe32fc748e4ecd55d17e74297f5c1",
+      "title": "Feisar freestyle rates",
+      "firmware_version": [
+        "4.3"
       ],
-      "include": [
-        "presets/4.3/rates/defaults.txt"
-      ]
+      "category": "RATES",
+      "status": "COMMUNITY",
+      "keywords": [
+        "rates",
+        "betaflight",
+        "feisar"
+      ],
+      "author": "Feisar",
+      "priority": 10000
+    },
+    {
+      "fullPath": "presets/4.3/rates/Garban_race.txt",
+      "hash": "38458536a284eccd15f779595d9bb18b833ac5b4a6bd2787f0ee51fb88f490b2",
+      "title": "Garban Official race rates",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RATES",
+      "status": "COMMUNITY",
+      "keywords": [
+        "racing",
+        "rates",
+        "DDC",
+        "Acrobaix",
+        "Garban"
+      ],
+      "author": "Garban",
+      "priority": 10000
     },
     {
       "fullPath": "presets/4.3/rates/Headsup533.txt",
       "hash": "82f3e158de3b4e037551a672dabaa752e44943c9b13f6ebf33c092c9d63dade1",
-      "options": [
-        {
-          "name": "Actual rates analogue",
-          "checked": false
-        }
-      ],
       "title": "Headsup racing rates",
       "firmware_version": [
         "4.3"
@@ -1346,21 +1476,11 @@
         "MultiGP"
       ],
       "author": "Evan Turner (Headsup)",
-      "description": [
-        "Famous 533 racing rates by Headsup - Evan Turner.",
-        "Betaflight type of rates with 533 degrees/sec max on all three axes.",
-        "Evan Turner - MultiGP Champion 2021, 2019 and 2018. MultiGP Internation Open Champion 2021 and 2021 DRL pilot.",
-        "Optional checkbox provides almost identical rates, but with the type = ACTUAL."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/92/",
-      "include": [
-        "presets/4.3/rates/defaults.txt"
-      ]
+      "priority": 10000
     },
     {
       "fullPath": "presets/4.3/rates/illusionfpv_freestyle.txt",
       "hash": "79a4e23fec488266e4e3ac174235d49bf013154b83caf0c8f5e223135be0f5f6",
-      "options": [],
       "title": "freestyle rates by IllusionFpv",
       "firmware_version": [
         "4.3"
@@ -1374,19 +1494,11 @@
         "quick"
       ],
       "author": "IllusionFpv",
-      "description": [
-        "Freestyle rates by IllusionFpv",
-        "Quick rates from developer IllusionFpv, with 1000 deg/sec on roll, 950 deg/sec on pitch and 700 deg/sec on yaw"
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/106",
-      "include": [
-        "presets/4.3/rates/defaults.txt"
-      ]
+      "priority": 10000
     },
     {
       "fullPath": "presets/4.3/rates/Klystrom.txt",
       "hash": "60cb76bb61ee4ada8b08590f4d1b7f3d41e89fddebb04d620294a490b6fb3ae7",
-      "options": [],
       "title": "Klystrom rates",
       "firmware_version": [
         "4.3"
@@ -1399,19 +1511,11 @@
         "freestyle"
       ],
       "author": "KlystromFPV",
-      "description": [
-        "Freestyle rates with 960 deg/sec for roll/pitch and 800 deg/sec for yaw. Been using this rates since I started FPV."
-      ]
+      "priority": 10000
     },
     {
       "fullPath": "presets/4.3/rates/limon.txt",
       "hash": "07372fdf1beee407d23e977a89f414c40dc1aaa620069c46a2b0a51bd49da2a0",
-      "options": [
-        {
-          "name": "Betaflight rates analogue",
-          "checked": false
-        }
-      ],
       "title": "Limon racing rates",
       "firmware_version": [
         "4.3"
@@ -1428,26 +1532,11 @@
         "MultiGP"
       ],
       "author": "Ivan Efimov (Limon)",
-      "description": [
-        "Fastest Russian racing rates by Limon - Ivan Efimov.",
-        "Actual type of rates with 670 degrees/sec max on all three axes.",
-        "Ivan Efimov - Designer of OpenRacer, Betaflight Dev (fastest Dev in any project) and fastest Russian in the USA",
-        "Optional checkbox provides almost identical rates, but with the type = BETAFLIGHT."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/100/",
-      "include": [
-        "presets/4.3/rates/defaults.txt"
-      ]
+      "priority": 10000
     },
     {
       "fullPath": "presets/4.3/rates/MinChan.txt",
       "hash": "2ec0aa7511e5642e28f82211380594a2efbf6e6e801942f1151d2fb5a9658c50",
-      "options": [
-        {
-          "name": "ACTUAL rates analogue",
-          "checked": false
-        }
-      ],
       "title": "MinChan Kim racing rates",
       "firmware_version": [
         "4.3"
@@ -1461,114 +1550,44 @@
         "rates"
       ],
       "author": "MinChan Kim",
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/99",
-      "description": [
-        "Racing rates by MinChan Kim - arguably the fastest drone pilot in the world.",
-        "747 deg/s max for roll, 600 deg/sec for pitch and 533 deg/sec for yaw.",
-        "Optional checkbox provides close ACTUAL rates analogue.",
-        "",
-        "MinChan win list (as of December 2021)",
-        "12 years old:",
-        "03.2016 - Dubai World Drone prix FreeStyle - 1st",
-        "05.2016 - KT Giga Drone racing king of kings - 1st",
-        "06.2016 - Gwacheon Drone Day racing - 1st",
-        "07.2016 - ASIA CUP SHANGHAI China Drone National - 1st",
-        "08.2016 - KT Giga Drone Racing World Masters - 1st",
-        "09.2016 - DX Korea Military Drone racing - 1st",
-        "11.2016 - Osan Drone Race World Cup - 1st",
-        "12.2016 - Pyeongchang International Drone Sports Competition FPV Racing - 1st, Freestyle - 1st",
-        "02.2017 - KAMA & DJI ARENA Drone Racing - 1st",
-        "13 years old",
-        "03.2017 - Awesome Drone Racing Arena - 1st",
-        "04.2017 - 2017 Hi-mart Mini Drone Racing event- 3rd​",
-        "04.2017​ - 2017 Korea Drone Matsers​ - 1st​",
-        "06.2017 - Gwacheon Drone Day racing - 1st​​",
-        "06.2017 - JeonJu Drone Soccer - 2nd(team)",
-        "06.2017 - KT Giga Drone racing king of kings - 1st​",
-        "08.2017 - KT Korea Drone Masters - 1st",
-        "08.2017 - 2017 chuncheon national leisure sports festival - 1st​",
-        "09.2017 - DR1 Racing - 1st",
-        "10.2017 - 2017 Korea Drone championship - 1st​",
-        "10.2017 - Ground Forces Festival Drone Racing - 1st",
-        "10.2017 - Yeongwol International Drone Sports competition FPV Racing - 1st, Freestyle - 1st, Team - 1st​​",
-        "11.2017 - Drone in Seoul - 2nd",
-        "14 years old",
-        "04.2018 - Han River Drone Festival - 1st​",
-        "05.2018 - Seoul International Drone Race World Cup - 1st, Team - 1st​",
-        "06.2018 - Incheon Robot Land Drone Race - 1st",
-        "09.2018 - FAI Daegu Drone Festa- 3rd, Team - 1st",
-        "09.2018 - International DroneSports Championship Racing - 1st, Slalom - 1st",
-        "09.2018 - World Drone Cup - 1st",
-        "10.2018 - Ground Forces Festival Drone Racing KT King of Kings - 1st",
-        "10.2018 - Yeonggwang International Smart E-mobility expo Drone Racing - 1st",
-        "10.2018 - 2018 Gwacheon FAI Drone Racing World Cup 4th",
-        "11.2018 - Asia World Expo WESG Hong Kong Esports Festival 2018 - 1st",
-        "12.2018 - 2018 UK Drone show-iSeries European Masters Championship - 1st",
-        "12.2018 - X-Fly Drone Racing Team - 1st",
-        "15 years old",
-        "03.2019 - Drone Champions League(DCL) Team - 1st",
-        "05.2019 - 2019 Starmach Pan Asian Drone Racing Exhibition(MultiGP) - 1st",
-        "05.2019 - Bo-Eun Jujube Drone Racing Competition - 1st",
-        "06.2019 - FAI Seoul Drone Race World Cup - 2nd",
-        "06.2019 - International Drone Racing Limited(IDRLC) - 1st",
-        "07.2019 - 2019 Alpensia Drone Freestyle Korea Open - 1st",
-        "07.2019 - D.Sports Korea Masters League Elite - 1st",
-        "08.2019 - Rostec Drone Festival - 1st",
-        "09.2019 - DAEGU FAI Drone World Cup - 1st",
-        "09.2019 - Gwacheon Drone Racing Championship - 1st",
-        "10.2019 - Yeongwol International Drone Sports Championship - 1st",
-        "11.2019 - JEONJU FAI World Drone Masters - 1st",
-        "11.2019 - D-sports Korea Masters Elite - 1st",
-        "12.2019 - NINGBO(China) FAI World Drone Racing Championship - 1st",
-        "16 years old",
-        "2020 - Drone Champions League - 1st",
-        "17 years old",
-        "09.2021 - Hadong first round - 1st",
-        "11.2021 - Seoul Drone Sports Racing - 1st",
-        "More to come!"
-      ],
-      "include": [
-        "presets/4.3/rates/defaults.txt"
-      ]
+      "priority": 10000
     },
     {
-      "fullPath": "presets/4.3/rates/UAV_tech.txt",
-      "hash": "b446efe96a216241890e10e0308030dd02b4ca975df3d50ba6723039768c343e",
-      "options": [],
-      "title": "UAV Tech rates",
+      "fullPath": "presets/4.3/rates/mouseFreestyle.txt",
+      "hash": "46b34a3ddf5526a7f752f5e62971096ccb6c170195affe921f8b7b323fb3293d",
+      "title": "mouseFPV Freestyle Rates",
       "firmware_version": [
         "4.3"
       ],
       "category": "RATES",
-      "status": "OFFICIAL",
+      "status": "COMMUNITY",
       "keywords": [
-        "UAV Tech",
-        "youtube",
-        "freestyle",
-        "HD",
-        "cinematic"
+        "freestyle"
       ],
-      "author": "Mark Spatz (UAV Tech)",
-      "description": [
-        "",
-        "Freestyle rates by Mark Spatz (UAV Tech)",
-        "1000 degrees/sec for roll and pitch, 700 - for yaw. Very smooth around the sticks middle.",
-        "Mark is a Betaflight contributor and tuner who prioritizes data over feelings. His YouTube channel includes some deep dives into tuning and blackbox analyzing."
+      "author": "mouseFPV",
+      "priority": 10000
+    },
+    {
+      "fullPath": "presets/4.3/rates/UAV_tech.txt",
+      "hash": "b0ca5a2a097e8b90f0aa50cbc72936512b4adfdde9a83cff76bd05fc87d36e62",
+      "title": "UAV Tech Rates (w/ Cinematic/Whoop Options)",
+      "firmware_version": [
+        "4.3"
       ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/91",
-      "include": [
-        "presets/4.3/rates/defaults.txt"
-      ]
+      "category": "RATES",
+      "status": "COMMUNITY",
+      "keywords": [
+        "whoop",
+        "freetyle",
+        "cinematic",
+        "HD"
+      ],
+      "author": "UAV Tech (Mark Spatz)",
+      "priority": 10000
     },
     {
       "fullPath": "presets/4.3/rates/Vanover.txt",
       "hash": "a967f62ea2403b1cae5036cdc2e08e5964d4722640e7578048b95ab356658cc6",
-      "options": [
-        {
-          "name": "Actual rates analogue",
-          "checked": false
-        }
-      ],
       "title": "Vanover racing/freestyle rates",
       "firmware_version": [
         "4.3"
@@ -1584,130 +1603,792 @@
         "freestyle"
       ],
       "author": "Alex Vanover",
-      "description": [
-        "Racing and freestyle rates by Vanover.",
-        "488 deg/sec for all axes sounds slow, but it's not if you check Vanover's freestyle and race videos.",
-        "Alex - 2017 MultiGP Champion and DRL pilot 2019, 2020, 2021. 2018 FAI Drone Sports and DR1 Champion. Professional acro drone operator for cinematrography."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/96",
-      "include": [
-        "presets/4.3/rates/defaults.txt"
-      ]
-    },
-    {
-      "fullPath": "presets/4.3/rc_link/Crossfire_150hz_locked _CFV3.txt",
-      "hash": "ccab0602ab7090a96e6b21613d6f3c99ae5d252062e0e13757d977276cfb6f7f",
-      "options": [],
-      "title": "TBS Crossfire 150hz locked  CFV3",
-      "firmware_version": [
-        "4.3"
-      ],
-      "category": "RC_LINK",
-      "status": "OFFICIAL",
-      "keywords": [
-        "rc link",
-        "TBS",
-        "cfv3",
-        "150hz",
-        "Crossfire"
-      ],
-      "author": "sugarK",
-      "description": [
-        "setup for TBS Crossfire 150hz locked  CFV3",
-        "WARNING: make ABSOLUTELY SURE that the Hardware > ADC Filter is un-checked! and both radio and the TX unit are all up to date with the latest EdgeTX, OpenTX or FreedomTX.",
-        "Please use RC smoothing presets for flying style required. Note base settings are for racing, there is a check box at the end for freestyle.",
-        "There are 2 current types of Crossfire protocol, CFV2 and CFV3 this can be checked in your TBS lua."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/30"
-    },
-    {
-      "fullPath": "presets/4.3/rc_link/Crossfire_150hz_locked_CFV2.txt",
-      "hash": "c1f08050464487aa68ed3f2c077fff04cc4c04ce70f34e508249fe1d265e790e",
-      "options": [],
-      "title": "TBS Crossfire 150hz locked  CFV2",
-      "firmware_version": [
-        "4.3"
-      ],
-      "category": "RC_LINK",
-      "status": "OFFICIAL",
-      "keywords": [
-        "defaults",
-        "rc link",
-        "tracer",
-        "TBS",
-        "cfv2",
-        "150hz",
-        "Crossfire"
-      ],
-      "author": "sugarK",
-      "description": [
-        "setup for TBS Crossfire 150hz locked  CFV2",
-        "WARNING: make ABSOLUTELY SURE that the Hardware > ADC Filter is un-checked! and both radio and the TX unit are all up to date with the latest EdgeTX, OpenTX or FreedomTX",
-        "Please use RC smoothing presets for flying style required. Note base settings are for racing, there is a check box at the end for freestyle.",
-        "There are 2 current types of Crossfire protocol, CFV2 and CFV3 this can be checked in your TBS lua."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/30"
-    },
-    {
-      "fullPath": "presets/4.3/rc_link/Crossfire_50hz_locked_CFV2_CFV3.txt",
-      "hash": "f79420891629bff4e75616e9f4058019a120cb69351e194648f941d51c829863",
-      "options": [],
-      "title": "TBS Crossfire 50hz locked  CFV2/CFV3",
-      "firmware_version": [
-        "4.3"
-      ],
-      "category": "RC_LINK",
-      "status": "OFFICIAL",
-      "keywords": [
-        "defaults",
-        "rc link",
-        "TBS",
-        "cfv2",
-        "50hz",
-        "Crossfire"
-      ],
-      "author": "sugarK",
-      "description": [
-        "setup for TBS Crossfire 50hz locked  CFV2",
-        "WARNING: make ABSOLUTELY SURE that the Hardware > ADC Filter is un-checked! and both radio and the TX unit are all up to date with the latest EdgeTX, OpenTX or FreedomTX",
-        "Please use RC smoothing presets for flying style required. Note base settings are for racing, there is a check box at the end for freestyle.",
-        "There are 2 current types of Crossfire protocol, CFV2 and CFV3 this can be checked in your TBS lua."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/30"
-    },
-    {
-      "fullPath": "presets/4.3/rc_link/Crossfire_dyanmic_rate.txt",
-      "hash": "6f1509982af245a5d997feda60121687e44e6f2bfb76f525c23817f5a2a7d196",
-      "options": [],
-      "title": "TBS Crossfire Dynamic rate CFV2/CFV3",
-      "firmware_version": [
-        "4.3"
-      ],
-      "category": "RC_LINK",
-      "status": "OFFICIAL",
-      "keywords": [
-        "rc link",
-        "TBS",
-        "cfv2",
-        "150hz",
-        "Crossfire",
-        "dynamic",
-        "cfv3"
-      ],
-      "author": "sugarK",
-      "description": [
-        "Setup for TBS Crossfire dynamic rate  CFV2/CFV3.",
-        "WARNING: make ABSOLUTELY SURE that the Hardware > ADC Filter is un-checked! and both radio and the TX unit are all up to date with the latest EdgeTX, OpenTX or FreedomTX.",
-        "Please use RC smoothing presets for flying style required. Note base settings are for racing, there is a check box at the end for freestyle.",
-        "There are 2 current types of Crossfire protocol, CFV2 and CFV3 this can be checked in your TBS lua. Also frankly we DO NOT recommend this TX setting, preferring one or the other of the locked modes as the RC smoothing can only be optimised for one of the frequency modes."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/30"
+      "priority": 10000
     },
     {
       "fullPath": "presets/4.3/rc_link/defaults.txt",
-      "hash": "44965114019d72a94d515080ffbe70f9e5c10c7713cef04db1d81a4df4014d16",
-      "options": [],
-      "title": "Default 4.3 RC link settings",
+      "hash": "dd9a493fb69537b8b495fbfa6f39477d69dba0c2538a2f2de68aa5a469616f05",
+      "title": "Reset RC related settings",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "OFFICIAL",
+      "keywords": [
+        "defaults",
+        "Rx",
+        "RC",
+        "reset",
+        "rc link",
+        "rc_link",
+        "smoothing",
+        "rc_smoothing"
+      ],
+      "author": "Betaflight",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/DJI_Normal.txt",
+      "hash": "f6adb5f164fe234ee3e0f96747d629d548ac222fb7d7f658202a2bb60d786bdf",
+      "title": "DJI Normal",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "DJI",
+        "rc",
+        "link",
+        "transmitter"
+      ],
+      "author": "UAV Tech (Mark Spatz)",
+      "force_options_review": true,
+      "priority": 10000000000
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/DJI_SBUS_Fast.txt",
+      "hash": "47e4acedecf6c68c74f9fe664a8614f4a2d3517e0665030918a549ca34d623ad",
+      "title": "DJI SBUS FAST",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "DJI",
+        "rc",
+        "link",
+        "SBUS fast"
+      ],
+      "author": "UAV Tech (Mark Spatz)",
+      "force_options_review": true,
+      "priority": 10000000000
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/elrs_150hz.txt",
+      "hash": "8eebd45b94b2ddcb67e0a79f129294cb0a4d73a0f2e32ed9cccbdfcfaf88181a",
+      "title": "ExpressLRS 150Hz",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "OFFICIAL",
+      "keywords": [
+        "ELRS",
+        "express",
+        "150Hz",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "ctzsnooze",
+      "force_options_review": true,
+      "priority": 10000000000
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/elrs_250hz.txt",
+      "hash": "a7f7542d0a921ce0e1916e61985b53efbec5aef269048ed6283ab1db5c6c7b4d",
+      "title": "ExpressLRS 250Hz",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "OFFICIAL",
+      "keywords": [
+        "ELRS",
+        "express",
+        "250Hz",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "ctzsnooze",
+      "force_options_review": true,
+      "priority": 10000000000
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/elrs_500hz.txt",
+      "hash": "3147f8122a0ac1de06e5191f744518ee0a88bb1fe1a918dc31834874c90b3857",
+      "title": "ExpressLRS 500Hz",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "OFFICIAL",
+      "keywords": [
+        "ELRS",
+        "express",
+        "500Hz",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "ctzsnooze",
+      "force_options_review": true,
+      "priority": 10000000000
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/elrs_50hz.txt",
+      "hash": "343ef0679091854be116fb1e42505069d00baf1998fe9daefc83b045f027b747",
+      "title": "ExpressLRS 50Hz",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "OFFICIAL",
+      "keywords": [
+        "ELRS",
+        "express",
+        "50Hz",
+        "20ms",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "ctzsnooze",
+      "force_options_review": true,
+      "priority": 10000000000
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/frsky_sbus.txt",
+      "hash": "6658ca5a761eb50bf0ae30e959427a0b68d0fe3f99df1bc565aab00c1bbb60c3",
+      "title": "FrSky Sbus",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "OFFICIAL",
+      "keywords": [
+        "frsky",
+        "sbus",
+        "9ms",
+        "111hz",
+        "rc",
+        "link",
+        "smoothing"
+      ],
+      "author": "ctzsnooze",
+      "force_options_review": true,
+      "priority": 10000000000
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/150hz_cinematic.txt",
+      "hash": "523c3e8fa296738bc56232b64f45eb61ef95055a5d4102de74e45bd8effdf91c",
+      "title": "Generic 150Hz Cinematic",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "150Hz",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/150hz_freestyle.txt",
+      "hash": "983382015eb022283f1229a3149dcb05ceba483d0a3a9ca3c38ac9b4f0de2f87",
+      "title": "Generic 150Hz Freestyle",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "150Hz",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/150hz_hd_freestyle.txt",
+      "hash": "22d8e690e0918d46a34c999cf1d5e59c4300bfecdcd885ee846f7e986d69ef28",
+      "title": "Generic 150Hz HD Freestyle",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "150Hz",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/150hz_race.txt",
+      "hash": "6c50daab06163fd01a6bfc2815c94bc16d689d0a18b0e05b628c4c877c36d7da",
+      "title": "Generic 150Hz Race",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "150Hz",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/150hz_ultra_cinematic.txt",
+      "hash": "354bb4aa7fea534fc77a6cd779887916b9c8317671e225a19b394b3a4e352529",
+      "title": "Generic 150Hz Ultra Cinematic",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "150Hz",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/250hz_cinematic.txt",
+      "hash": "e158eec88ce0e02f52625c694169b60b5d1d3f50bddc98306ee5b59272282b51",
+      "title": "Generic 250Hz Cinematic",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "250Hz",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/250hz_freestyle.txt",
+      "hash": "46f57e19697bcffe3fe86b80561e7ae539cfb2dff58e796fa59678dabc9ebb26",
+      "title": "Generic 250Hz Freestyle",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "250Hz",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/250hz_hd_freestyle.txt",
+      "hash": "93c247fee6ef0a7175c887bd608951aec9b4be3c326a1ba183973bbbdc1cf8af",
+      "title": "Generic 250Hz HD Freestyle",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "250Hz",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/250hz_race.txt",
+      "hash": "ad8490daeb76c1da2dd4c3fa71f546a870376266986f2989a08bbc49b329dd4e",
+      "title": "Generic 250Hz Race",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "250Hz",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/250hz_ultra_cinematic.txt",
+      "hash": "b69b9a2d33263c6c65651407fe2c834f51d70945a134d832981808553943fbfb",
+      "title": "Generic 250Hz Ultra Cinematic",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "250Hz",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/500hz_cinematic.txt",
+      "hash": "0de40067a3a69d631bf506054d180d5196eaf3057c04dbf40b930f5484bbbb79",
+      "title": "Generic 500Hz Cinematic",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "500Hz",
+        "2ms",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/500hz_freestyle.txt",
+      "hash": "802a6edfd77f29baa69bc8943049d8f198070c3c5edefd8af49e83183cc380f2",
+      "title": "Generic 500Hz Freestyle",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "500Hz",
+        "2ms",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/500hz_hd_freestyle.txt",
+      "hash": "be5bcdb0e2d3950ff4465d51d0354f7ed6b38465521178f9cdc535e7624406f0",
+      "title": "Generic 500Hz HD Freestyle",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "500Hz",
+        "2ms",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/500hz_race.txt",
+      "hash": "1d2c4364548e4d89830c6a1f6754b216a1417b9052f844ecc94fe3d61a51a9df",
+      "title": "Generic 500Hz Race",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "500Hz",
+        "2ms",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/500hz_ultra_cinematic.txt",
+      "hash": "b354a96337d873727c952119713d1b0f52fe4a93796348ef51edf2ffa15bdb37",
+      "title": "Generic 500Hz Ultra Cinematic",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "500Hz",
+        "2ms",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/50hz_cinematic.txt",
+      "hash": "46f2d5511a0c1138a8d6c695520a7f0748c3c7c1b3595558f347871ecd9f176a",
+      "title": "Generic 50Hz Cinematic",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "50Hz",
+        "20ms",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/50hz_freestyle.txt",
+      "hash": "568a4cdfb15161d24baf08d7396915031ea6927cdbf6a9e348b3daccec907aa5",
+      "title": "Generic 50Hz Freestyle",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "50Hz",
+        "20ms",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/50hz_hd_freestyle.txt",
+      "hash": "8cc029fd98830144ce153c8583e28bb3dcf552a5aaf1ac0ba4d43d9c5c2aadc0",
+      "title": "Generic 50Hz HD Freestyle",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "50Hz",
+        "20ms",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/50hz_race.txt",
+      "hash": "87af7344dbd24f35c0d8e970fa9d419fed93e374bc99bf09be0338100e370785",
+      "title": "Generic 50Hz Race",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "50Hz",
+        "20ms",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/generic/50hz_ultra_cinematic.txt",
+      "hash": "432414c5e345dd8d3d1810872746f40ff7ee37cff69d992cffcd4eb6dbe04421",
+      "title": "Generic 50Hz Ultra Cinematic",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "50Hz",
+        "20ms",
+        "rc",
+        "rx",
+        "link",
+        "smoothing"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/ghost/long_range.txt",
+      "hash": "37bf52892ae6489822ac980577a60b81bf2762b87f0b5d18fce38855637f84d9",
+      "title": "IRC Ghost (Long Range)",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "15Hz",
+        "Long Range",
+        "ghost",
+        "rc",
+        "rx",
+        "link",
+        "ghost",
+        "IRC",
+        "GHST",
+        "immersionRC",
+        "immersion"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "priority": 10000000000
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/ghost/normal.txt",
+      "hash": "2c208ecec8ec21fe23a20c150d91b9debe94a3bbe85e8513730288bad2fdc221",
+      "title": "IRC Ghost (Mode: Normal)",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "55Hz",
+        "Normal",
+        "ghost",
+        "rc",
+        "rx",
+        "link",
+        "ghost",
+        "IRC",
+        "GHST",
+        "immersionRC",
+        "immersion"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "force_options_review": true,
+      "priority": 10000000000
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/ghost/pure_race.txt",
+      "hash": "02fa58697a85f4015a6727202565265dcd1d96119299ff7122a6a0827af42e79",
+      "title": "IRC Ghost (Pure Race)",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "250Hz",
+        "Pure Race",
+        "ghost",
+        "rc",
+        "rx",
+        "link",
+        "ghost",
+        "IRC",
+        "GHST",
+        "immersionRC",
+        "immersion"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "force_options_review": true,
+      "priority": 10000000000
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/ghost/race.txt",
+      "hash": "604505e2bf18d7064bcd5579ef9f1c54817639605f0e413f20c863a2af271a6e",
+      "title": "IRC Ghost (Mode: Race)",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "166Hz",
+        "Race",
+        "ghost",
+        "rc",
+        "rx",
+        "link",
+        "ghost",
+        "IRC",
+        "GHST",
+        "immersionRC",
+        "immersion"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "force_options_review": true,
+      "priority": 10000000000
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/ghost/race250.txt",
+      "hash": "594e3c6aac3387c98e601ad733ed1661a1cee9ea6f3118e7d9e42b7c7602b476",
+      "title": "IRC Ghost (Race250)",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "250Hz",
+        "Race250",
+        "ghost",
+        "rc",
+        "rx",
+        "link",
+        "ghost",
+        "IRC",
+        "GHST",
+        "immersionRC",
+        "immersion"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "force_options_review": true,
+      "priority": 10000000000
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/ghost/race500.txt",
+      "hash": "a609358caf58090ece18d86916b19dc418a5d6321ac557a61f6d90827a0c8c2c",
+      "title": "IRC Ghost (Race500)",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "500Hz",
+        "Race500",
+        "ghost",
+        "rc",
+        "rx",
+        "link",
+        "ghost",
+        "IRC",
+        "GHST",
+        "immersionRC",
+        "immersion"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "force_options_review": true,
+      "priority": 10000000000
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/ghost/solid250.txt",
+      "hash": "10e98599896fb36691557a0a09134139b9640055a8e7e58bc48d10e73dbffd95",
+      "title": "IRC Ghost (Solid250)",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "250Hz",
+        "Solid250",
+        "ghost",
+        "rc",
+        "rx",
+        "link",
+        "ghost",
+        "IRC",
+        "GHST",
+        "immersionRC",
+        "immersion"
+      ],
+      "author": "Ivan Efimov (Limon)",
+      "force_options_review": true,
+      "priority": 10000000000
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/redpine_666hz.txt",
+      "hash": "4eda547aa9254df2aaa1f8d9ced25a219864255ac5a58c3b53ad3545fc19f33d",
+      "title": "Redpine 666Hz",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "Redpine",
+        "rc",
+        "link",
+        "666Hz"
+      ],
+      "author": "ctzsnooze",
+      "force_options_review": true,
+      "priority": 10000000000
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/redpine_mpm.txt",
+      "hash": "1f50051c8871655a820d60b1d221b35bb052b26a9880c916d963faa74c4ecfd0",
+      "title": "Redpine MPM",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "RC_LINK",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "Redpine",
+        "rc",
+        "link",
+        "666Hz"
+      ],
+      "author": "ctzsnooze",
+      "force_options_review": true,
+      "priority": 10000000000
+    },
+    {
+      "fullPath": "presets/4.3/rc_link/reset_to_defaults.txt",
+      "hash": "8b88664102911f576820ad482c5680a61e1c3c0065df7be544d84ebeefe31362",
+      "title": "Reset ALL RC link related settings",
       "firmware_version": [
         "4.3"
       ],
@@ -1720,527 +2401,103 @@
         "rc_link"
       ],
       "author": "Betaflight",
-      "description": [
-        "Resets all RC Link related parameters to 4.3 defaults"
-      ]
+      "priority": 0
     },
     {
-      "fullPath": "presets/4.3/rc_link/elrs_150hz.txt",
-      "hash": "60e26ee7de4ac6ed03d06903a416a7b292d9ceb6eadb143f192d7e2cd753c6af",
-      "options": [
-        {
-          "name": "Whole pack voltage readings",
-          "checked": false
-        },
-        {
-          "name": "Race feedforward settings",
-          "checked": false
-        },
-        {
-          "name": "HD Freestyle feedforward settings",
-          "checked": false
-        },
-        {
-          "name": "Cinematic feedforward settings",
-          "checked": false
-        }
-      ],
-      "title": "ELRS 150hz",
+      "fullPath": "presets/4.3/rc_link/tbs/crossfire_150hz.txt",
+      "hash": "cc79b53a8abaf6413302d29c93daafdc51643e2268bd29b0ed369f93202c7af4",
+      "title": "TBS Crossfire 150Hz",
       "firmware_version": [
         "4.3"
       ],
       "category": "RC_LINK",
-      "status": "OFFICIAL",
+      "status": "EXPERIMENTAL",
       "keywords": [
-        "ELRS",
+        "150Hz",
+        "TBS",
+        "Crossfire",
+        "Team Black Sheep",
+        "CRSF",
         "rc",
-        "link",
-        "rc_link",
-        "150hz"
-      ],
-      "author": "ctzsnooze",
-      "description": [
-        "Basic RC link settings for a 150hz ELRS link via CRSF",
-        "WARNING: make ABSOLUTELY SURE that the OpenTx or EdgeTx Hardware ADC Filter is un-checked!",
-        "WARNING: check that you are using a compatible version of EdgeTx or OpenTx!",
-        "The voltage option is for OpenTx telemetry back to the transmitter, default is per cell, option is whole pack."
-      ]
-    },
-    {
-      "fullPath": "presets/4.3/rc_link/elrs_250hz.txt",
-      "hash": "e0905b0c5c808ac6ffd9172bbc5567c56880a774353f21bc2b704cc1a100adb3",
-      "options": [
-        {
-          "name": "Whole pack voltage readings to Tx",
-          "checked": false
-        },
-        {
-          "name": "Race feedforward settings",
-          "checked": false
-        },
-        {
-          "name": "HD Freestyle feedforward settings",
-          "checked": false
-        },
-        {
-          "name": "Cinematic feedforward settings",
-          "checked": false
-        }
-      ],
-      "title": "ELRS 250hz",
-      "firmware_version": [
-        "4.3"
-      ],
-      "category": "RC_LINK",
-      "status": "OFFICIAL",
-      "keywords": [
-        "ELRS",
-        "rc",
-        "link",
-        "250hz"
-      ],
-      "author": "ctzsnooze",
-      "description": [
-        "Basic RC link settings for a 250hz ELRS link via CRSF",
-        "WARNING: make ABSOLUTELY SURE that the OpenTx or EdgeTx Hardware ADC Filter is un-checked!",
-        "WARNING: check that you are using a compatible version of EdgeTx or OpenTx!",
-        "Voltage option is for OpenTx telemetry back to the transmitter, default is per cell, option whole pack."
-      ]
-    },
-    {
-      "fullPath": "presets/4.3/rc_link/elrs_500hz.txt",
-      "hash": "83aa700e039b46f3633b0c13a4ed220a89372e18cdbe1590d8ba30e7a3abb566",
-      "options": [
-        {
-          "name": "Whole pack voltage readings to Tx",
-          "checked": false
-        },
-        {
-          "name": "Race feedforward settings",
-          "checked": false
-        },
-        {
-          "name": "HD Freestyle feedforward settings",
-          "checked": false
-        },
-        {
-          "name": "Cinematic feedforward settings",
-          "checked": false
-        }
-      ],
-      "title": "ELRS 500hz",
-      "firmware_version": [
-        "4.3"
-      ],
-      "category": "RC_LINK",
-      "status": "OFFICIAL",
-      "keywords": [
-        "ELRS",
-        "rc",
-        "link",
-        "500hz"
-      ],
-      "author": "ctzsnooze",
-      "description": [
-        "Basic RC link settings for a 500hz ELRS link via CRSF.",
-        "WARNING: make ABSOLUTELY SURE that the OpenTx or EdgeTx Hardware ADC Filter is un-checked!",
-        "WARNING: check that you are using a compatible version of EdgeTx or OpenTx!",
-        "If a log shows excessive noise in your feedforward trace, most likely there is a Tx firmware issue.",
-        "The Voltage option is for OpenTx telemetry back to the transmitter, default is per cell, option whole pack."
-      ]
-    },
-    {
-      "fullPath": "presets/4.3/rc_link/elrs_50hz.txt",
-      "hash": "4f29a032197bc16dc671c975b813cb2f27a171fc38f7a672676bf17978441ff9",
-      "options": [
-        {
-          "name": "Whole pack voltage readings",
-          "checked": false
-        },
-        {
-          "name": "Race feedforward settings",
-          "checked": false
-        },
-        {
-          "name": "HD Freestyle feedforward settings",
-          "checked": false
-        },
-        {
-          "name": "Cinematic feedforward settings",
-          "checked": false
-        }
-      ],
-      "title": "ELRS 50hz",
-      "firmware_version": [
-        "4.3"
-      ],
-      "category": "RC_LINK",
-      "status": "OFFICIAL",
-      "keywords": [
-        "ELRS",
-        "rc",
-        "link",
-        "rc_link",
-        "50hz"
-      ],
-      "author": "ctzsnooze",
-      "description": [
-        "Basic RC link settings for a 50hz ELRS link via CRSF.",
-        "WARNING: make ABSOLUTELY SURE that the OpenTx or EdgeTx Hardware ADC Filter is un-checked!",
-        "WARNING: check that you are using a compatible version of EdgeTx or OpenTx!",
-        "The voltage option is for OpenTx telemetry back to the transmitter, default is per cell, option is whole pack."
-      ]
-    },
-    {
-      "fullPath": "presets/4.3/rc_link/frsky_sbus.txt",
-      "hash": "fe62f2097d15c2db94df7bc77ab149e00fedf0fa913942ec57f395e8716d924f",
-      "options": [
-        {
-          "name": "Whole pack voltage readings",
-          "checked": false
-        },
-        {
-          "name": "Imperial units",
-          "checked": false
-        },
-        {
-          "name": "Telemetry inverted",
-          "checked": false
-        },
-        {
-          "name": "Full duplex telemetry",
-          "checked": false
-        },
-        {
-          "name": "Bound with >8 channels",
-          "checked": false
-        },
-        {
-          "name": "Race",
-          "checked": false
-        },
-        {
-          "name": "HD Freestyle",
-          "checked": false
-        },
-        {
-          "name": "Cinematic",
-          "checked": false
-        }
-      ],
-      "title": "FrSky Sbus",
-      "firmware_version": [
-        "4.3"
-      ],
-      "category": "RC_LINK",
-      "status": "OFFICIAL",
-      "keywords": [
-        "frsky",
-        "sbus",
-        "rc",
+        "rx",
         "link"
       ],
-      "author": "ctzsnooze",
-      "description": [
-        "Basic RC link settings for a 111hz / 9ms FrSky Sbus link, with the Rx bound in D16 mode with no more than 8 channels.",
-        "These settings work best when used with a version of OpenTx with good module sync.",
-        "Note: Telemetry requires smartPort (s.Port) and does not convey RSSI (use Lua or analog RSSI).",
-        "Note: When more than 8 channels are bound, manual RC smoothing settings and two point averaging is required.",
-        "Early versions of OpenTx with poor module sync will require two point averaging.",
-        "Cell vs full voltage option affects which value will be sent by telemetry to the handset. Default is per cell.",
-        "Units default to metric. Telemetry defaults to non-inverted and half-duple. Both can be changed with checkbox.",
-        "Other telemetry settings,eg gps format, default latitude and longitude, extra sensors, require manual CLI entries.",
-        "Other options are provided for the intended flying style."
-      ]
+      "author": "Ivan Efimov (Limon)",
+      "force_options_review": true,
+      "priority": 10000000000
     },
     {
-      "fullPath": "presets/4.3/rc_link/Tracer_CFV2.txt",
-      "hash": "a3788f829dd086f1c3ce8fe5fffbb8d0e92f5a88fd0218784875c105c9a40990",
-      "options": [],
-      "title": "TBS Tracer CFV2",
+      "fullPath": "presets/4.3/rc_link/tbs/crossfire_50hz.txt",
+      "hash": "e4bfdca099a049bf525bb8fa236a4bd97168a59516db639f4936f47402ccbc50",
+      "title": "TBS Crossfire 50Hz",
       "firmware_version": [
         "4.3"
       ],
       "category": "RC_LINK",
-      "status": "OFFICIAL",
+      "status": "EXPERIMENTAL",
       "keywords": [
-        "defaults",
-        "rc link",
-        "tracer",
+        "50Hz",
         "TBS",
-        "cfv2",
-        "250hz"
+        "Crossfire",
+        "Team Black Sheep",
+        "CRSF",
+        "rc",
+        "rx",
+        "link"
       ],
-      "author": "sugarK",
-      "description": [
-        "setup fo the various TBS radio links via CRSF",
-        "WARNING: make ABSOLUTELY SURE that the Hardware > ADC Filter is un-checked! and both radio and the TX unit are all up to date with the latest EdgeTX, OpenTX or FreedomTX",
-        "Please use RC smoothing presets for flying style required. Note base settings are for racing, there is a check box at the end for freestyle.",
-        "There are 2 current types of Crossfire protocol, CFV2 and CFV3 this can be checked in your TBS lua."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/30"
+      "author": "Ivan Efimov (Limon)",
+      "force_options_review": true,
+      "priority": 10000000000
     },
     {
-      "fullPath": "presets/4.3/rc_link/Tracer_CFV3.txt",
-      "hash": "1ba3f02c2eb1cf53941685088f37edd6549d4c9af606751ceec39c1def5a7ea0",
-      "options": [],
-      "title": "TBS Tracer CFV3",
+      "fullPath": "presets/4.3/rc_link/tbs/tracer_250hz.txt",
+      "hash": "7ae066ca7f02c9a14de85ed184e0dac160eb47123bb6467d127a0c4211ee0695",
+      "title": "TBS Tracer 250Hz",
       "firmware_version": [
         "4.3"
       ],
       "category": "RC_LINK",
-      "status": "OFFICIAL",
+      "status": "EXPERIMENTAL",
       "keywords": [
-        "defaults",
-        "rc link",
-        "tracer",
+        "250Hz",
         "TBS",
-        "cfv3",
-        "250hz"
-      ],
-      "author": "sugarK",
-      "description": [
-        "setup for TBS Tacer CFV3",
-        "WARNING: make ABSOLUTELY SURE that the Hardware > ADC Filter is un-checked! and both radio and the TX unit are all up to date with the latest EdgeTX, OpenTX or FreedomTX",
-        "Please use RC smoothing presets for flying style required. Note base settings are for racing, there is a check box at the end for freestyle.",
-        "There are 2 current types of Crossfire protocol, CFV2 and CFV3 this can be checked in your TBS lua."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/30"
-    },
-    {
-      "fullPath": "presets/4.3/rc_smoothing/cinematic.txt",
-      "hash": "874cf6273bc3ffa9147f7d3d09d7867495e0f56a1e689062277dcde65cf30ead",
-      "options": [
-        {
-          "name": "Cinematic Actual rates",
-          "checked": false
-        }
-      ],
-      "title": "Cinematic RC smoothing",
-      "firmware_version": [
-        "4.3"
-      ],
-      "category": "RC_SMOOTHING",
-      "status": "OFFICIAL",
-      "keywords": [
-        "cinematic",
+        "Tracer",
+        "Team Black Sheep",
+        "CRSF",
         "rc",
-        "smoothing",
-        "rc_smoothing",
-        "jitter",
-        "transition",
-        "hd"
+        "rx",
+        "link"
       ],
-      "author": "ctzsnooze",
-      "description": [
-        "Warning: will feel VERY 'soft' and smooth with small stick inputs!",
-        "Note: auto-smoothing values are over-ridden by manually configure cutoff values.",
-        "This preset provides RC smoothing settings for cinematic HD footage. By using fixed cutoffs, it will give a consistent smooth stick feel across a wide range of RC link frequencies.",
-        "There is no need to turn off feedforward; it should remain at values that give good stick responsiveness.",
-        "For even smoother stick feel, reduce rc_smoothing_setpoint_cutoff and rc_smoothing_feedforward_cutoff to 10 in CLI.  If too smooth, increase rc_smoothing_setpoint_cutoff and rc_smoothing_feedforward_cutoff to 20 in CLI.",
-        "",
-        "Suggestion: Actual Rates, low centre sensitivity, no expo, 400-500 deg/s max."
-      ]
-    },
-    {
-      "fullPath": "presets/4.3/rc_smoothing/defaults.txt",
-      "hash": "a1c12a5b8fb6d7859f70e603144b74a570e664573b6f4455807d6c427cb35621",
-      "options": [],
-      "title": "Default 4.3 RC smoothing settings",
-      "firmware_version": [
-        "4.3"
-      ],
-      "category": "RC_SMOOTHING",
-      "status": "OFFICIAL",
-      "keywords": [
-        "defaults",
-        "reset",
-        "rc smoothing",
-        "rc_smoothing"
-      ],
-      "author": "Betaflight",
-      "description": [
-        "Resets RC Smoothing settings to 4.3 defaults"
-      ]
-    },
-    {
-      "fullPath": "presets/4.3/rc_smoothing/freestyle.txt",
-      "hash": "ca95f3a5f58913253ba1dbb57c4d0392043d4769226efb94f7140528303a6c6c",
-      "options": [
-        {
-          "name": "Suggested Actual rates",
-          "checked": false
-        }
-      ],
-      "title": "Freestyle RC smoothing",
-      "firmware_version": [
-        "4.3"
-      ],
-      "category": "RC_SMOOTHING",
-      "status": "OFFICIAL",
-      "keywords": [
-        "freestyle",
-        "rc",
-        "smooth",
-        "smoothing",
-        "rc_smoothing",
-        "jitter"
-      ],
-      "author": "ctzsnooze",
-      "description": [
-        "RC smoothing settings for Freestyle footage.",
-        "Fixed cutoff frequency for consistent, responsive results over a wide range of RC link frequencies. Auto-smoothing cutoff values are over-ridden by the fixed cutoff values.",
-        "There should be no need to turn off feedforward or to enable transition, beause the jitter reduction provides dynamic attenuation of feedforward whenever the sticks move slowly.",
-        "",
-        "Option: Actual Rates, with centre sensitivity around 60 and 750 deg/s max."
-      ]
-    },
-    {
-      "fullPath": "presets/4.3/rc_smoothing/hd_freestyle.txt",
-      "hash": "ddeacc0ac0f495d1877e751eaf3f979583be7de308dc2f1797976b1d77c66d50",
-      "options": [
-        {
-          "name": "Recommended Actual rates",
-          "checked": false
-        }
-      ],
-      "title": "Freestyle HD RC smoothing",
-      "firmware_version": [
-        "4.3"
-      ],
-      "category": "RC_SMOOTHING",
-      "status": "OFFICIAL",
-      "keywords": [
-        "freestyle",
-        "rc",
-        "smooth",
-        "HD",
-        "freestyle_HD",
-        "HD_freestyle",
-        "smoothing",
-        "rc_smoothing",
-        "jitter"
-      ],
-      "author": "ctzsnooze",
-      "description": [
-        "RC smoothing settings for smooth HD freestyle footage.",
-        "This preset uses fixed manual cutoff frequencies for consistent results over a wide range of RC link frequencies - the auto cutoff values are not used.",
-        "There is no need to turn off feedforward or to enable transition; jitter reduction provides dynamic attenuation of feedforward when sticks move slowly.",
-        "",
-        "Option: Actual Rates, centre sensitivity 30 deg/s, max rate 750 deg/s, zero expo"
-      ]
-    },
-    {
-      "fullPath": "presets/4.3/rc_smoothing/race.txt",
-      "hash": "390abab514bab1640dc3524b24f503f24cddc7e32aaf8c2a15c5fcef620775cc",
-      "options": [],
-      "title": "Race RC smoothing",
-      "firmware_version": [
-        "4.3"
-      ],
-      "category": "RC_SMOOTHING",
-      "status": "OFFICIAL",
-      "keywords": [
-        "aggressive",
-        "rc",
-        "smoothing",
-        "race",
-        "rc_smoothing",
-        "jitter"
-      ],
-      "author": "ctzsnooze",
-      "description": [
-        "RC smoothing settings for racing that slightly increases stick responsiveness over defaults.",
-        "Note: this preset workse best with a locked-frequency RC link.",
-        "Uses automatic cutoff adjustment that will optimise the cutoff to the link frequency at arming. As a result, faster RC links will feel more responsive.",
-        "If sticks are too sensitive, increase the auto smoothing factors in the CLI.",
-        "Note: If motors feel warmer than usual after applying this preset, return the auto RC smoothing values back to default of 30."
-      ]
+      "author": "Ivan Efimov (Limon)",
+      "force_options_review": true,
+      "priority": 10000000000
     },
     {
       "fullPath": "presets/4.3/tune/ctzsnooze_5in_4S_race.txt",
-      "hash": "adf2a888087a2037469a02ffbaa81898513cfca47f6566bafaa127a629e80e9c",
-      "options": [
-        {
-          "name": "FILTER: RPM enabled, ctzsnooze race",
-          "checked": false
-        },
-        {
-          "name": "FILTER: RPM enabled, noisy build",
-          "checked": false
-        },
-        {
-          "name": "FILTER: NON-RPM ESCs, normal build",
-          "checked": false
-        },
-        {
-          "name": "Default RC_smoothing (recommended)",
-          "checked": true
-        },
-        {
-          "name": "Throttle limit 96% (recommended)",
-          "checked": false
-        },
-        {
-          "name": "Full Sag compensation (recommended)",
-          "checked": false
-        },
-        {
-          "name": "No deadband (recommended)",
-          "checked": false
-        },
-        {
-          "name": "Flat throttle curve (recommended)",
-          "checked": false
-        },
-        {
-          "name": "Arm at any angle (recommended)",
-          "checked": false
-        },
-        {
-          "name": "Try ctzsnooze's race Rates (optional)",
-          "checked": false
-        }
-      ],
-      "title": "5\" 4S race by ctzsznooze",
+      "hash": "c2291123e94d95c6de677d8b4ce618c074306bfa35b2f801c4a2743fddcae69d",
+      "title": "4S, 3\" to 5\" race tune by ctzsznooze",
       "firmware_version": [
         "4.3"
       ],
       "category": "TUNE",
       "status": "OFFICIAL",
       "keywords": [
+        "3in",
+        "4in",
         "5in",
+        "twig",
         "4S",
         "race",
         "tune",
         "ctzsnooze"
       ],
       "author": "ctzsnooze",
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/8",
-      "description": [
-        "Basic 5\" 4S race setup for 4.3 by ctzsnooze, tolerates bad props.",
-        "",
-        "RPM filtering is STRONGLY RECOMMENDED!",
-        "",
-        "PLEASE CHECK THE OPTIONS IN THE LIST ABOVE!",
-        "NOTE: You must choose ONE of the three FILTER options!",
-        "You should check all the (recommended) options",
-        "",
-        "My suggested Rates are (optional)"
-      ],
-      "include": [
-        "presets/4.3/tune/defaults.txt",
-        "presets/4.3/filters/ctzsnooze_race.txt",
-        "presets/4.3/filters/default_rpm_noisy.txt",
-        "presets/4.3/filters/default_no_rpm_normal.txt",
-        "presets/4.3/rc_smoothing/race.txt",
-        "presets/4.3/rates/ctzsnooze_race.txt"
-      ]
+      "force_options_review": true,
+      "priority": 1000000000000
     },
     {
       "fullPath": "presets/4.3/tune/defaults.txt",
-      "hash": "01aca6320dd03893dca8af4e246f156f2347a9dff618d23e7641f9e4590fdd53",
-      "options": [],
+      "hash": "828b9a4b14377cd9d59d803afb9c6ae3eda6d5cb7865cbf21c95c5f55acdaa05",
       "title": "Tune defaults for Basic 4.3 TUNES",
       "firmware_version": [
         "4.3"
@@ -2256,32 +2513,39 @@
         "default"
       ],
       "author": "Betaflight",
-      "description": [
-        "Resets all Basic 4.3 Tune category parameters to defaults",
-        "WARNING: Overwrites all settings mentioned below to defaults.  The User cannot retain their previous values.",
-        "WARNING: Tune authors must explicitly set these values to something other than default, if needed for the tune.",
-        "DOES NOT reset rates, filters, rc_smoothing, and many other parameters."
-      ]
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/tune/fpvian_basher_freestyle.txt",
+      "hash": "596fb4e7745a7719916c34759fa7a7e7af7982363d4c26c69f0dee309c509a1a",
+      "title": "Basher Freestyle 6S 5\" by FPVian",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "TUNE",
+      "status": "COMMUNITY",
+      "keywords": [
+        "basher",
+        "freestyle",
+        "5 Inch",
+        "5 In",
+        "5\"",
+        "bando",
+        "fpvian"
+      ],
+      "author": "FPVian",
+      "force_options_review": true,
+      "priority": 1000000000000
     },
     {
       "fullPath": "presets/4.3/tune/freedom_spec_460g.txt",
-      "hash": "5ab6ccd508a5938a5b721fa57221ecee5ed3cc787493661a43bc309a48d86b61",
-      "options": [
-        {
-          "name": "Dshot300",
-          "checked": false
-        },
-        {
-          "name": "Force LiPo sell count = 3",
-          "checked": false
-        }
-      ],
+      "hash": "5ac3216c39f3b1b630d6938ac943e3b00c38e15585394413d0d424f634db5e16",
       "title": "Freedom Spec 460 - 500g",
       "firmware_version": [
         "4.3"
       ],
       "category": "TUNE",
-      "status": "EXPERIMENTAL",
+      "status": "COMMUNITY",
       "keywords": [
         "sugarK",
         "limon",
@@ -2296,44 +2560,11 @@
         "5\""
       ],
       "author": "Ivan Efimov (Limon)",
-      "description": [
-        "This tune works ONLY with bidirectional DSHOT 600/300. If your FC can't handle DSHOT600, pelase select DSHOT 300 in the options here.",
-        "If your RC link is anything different from 250hz, please use corresponding preset from RC link category on top of this preset.",
-        "DO NOT try to fly this tune on any battery besides 3S!",
-        "Freedom spec: 3S LiPo, Headsup 1960kv 2207 motors, HQ R38 5 inch props. Minimum weight with the battery: 460g.",
-        "",
-        "This tune prioritizes clean motor traces at full throttle to make sure your quad flies as fast as possible without loosing energy for heating the motors.",
-        "The less noise the faster your quad flies at full throttle. Make sure your frame is solid, all screws are tight, RC link/OpenTX/EdgeTX is up to date.",
-        "",
-        "Credits: sugarK and ctzsnooze for helping with this preset. It is not done yet and there is some room for more impromements. Stay tuned!"
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/116",
-      "include_warning": [
-        "misc/warnings/en/dshot.txt",
-        "misc/warnings/en/rpm_filters.txt"
-      ],
-      "include": [
-        "presets/4.3/tune/defaults.txt",
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "priority": 1000000000000
     },
     {
       "fullPath": "presets/4.3/tune/karate_freestyle_5_inch.txt",
-      "hash": "f01d120cbd51bfee298a8ba8b78d9fb6577fbc20d2b36b699f9215d47135df31",
-      "options": [
-        {
-          "name": "Dshot600",
-          "checked": true
-        },
-        {
-          "name": "Dshot300",
-          "checked": false
-        },
-        {
-          "name": "dynamic idle",
-          "checked": false
-        }
-      ],
+      "hash": "93602c5a24a653093e3ef37d10554d3138acb4da4de60ecabbe2ad0640f72831",
       "title": "Freestyle 5\" Karate Style",
       "firmware_version": [
         "4.3"
@@ -2352,60 +2583,11 @@
         "freestyle"
       ],
       "author": "sugarK",
-      "description": [
-        "This is the sugarK freestyle tune, its been test over the last few months, on 5\" quads by members of the UAVtech discord.. This is a starting point tune and has siders active so you can fine tune it easily. In saying that its still a pretty spicy tune and use at your own risk.",
-        "",
-        "THIS PRESET IS NOT SUITABLE FOR RACING QUADS AND MAY RESULT IN FLY AWAYS OR BURNT MOTORS",
-        "",
-        "Things to note.. YOU HAVE TO USE RPM FILTERING WITH THIS TUNE, failure to do so might result in fire and regarding Dshot600,  if your setup has errors in the motor tab using bidirectional Dshot then change to 8k/4k and dshot300.",
-        "Also this should be applied to a clean flash after you've setup your rates, swtiches, vtx tables etc. To test arm the quad with props on, it should sound clean with no grinding, if it passes that then hover test and check motor temps.",
-        "If any thing is off don't fly it!!",
-        "",
-        "SECOND NOTE.... Radio links.. 1. Make sure your radio system is totally up to date using either Edgetx or Opentx and your ADC in the hardware page is OFF 2. Go to the radio presets and apply the correct setup for your system and link speed."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/95",
-      "include_warning": [
-        "misc/warnings/en/rpm_filters.txt",
-        "misc/warnings/en/freestyle.txt"
-      ],
-      "include": [
-        "presets/4.3/tune/defaults.txt",
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "priority": 1000000000000
     },
     {
       "fullPath": "presets/4.3/tune/karate_race.txt",
-      "hash": "385ff5ed9d2c46d6d081ce26527c7c13bd6aa5ec479228193ad2478ac2d8af38",
-      "options": [
-        {
-          "name": "Dshot600",
-          "checked": true
-        },
-        {
-          "name": "Dshot300",
-          "checked": false
-        },
-        {
-          "name": "Dynamic idle for 2000kv 6s",
-          "checked": false
-        },
-        {
-          "name": "Spicy tune",
-          "checked": false
-        },
-        {
-          "name": "Limons Super Spicy Dmin",
-          "checked": false
-        },
-        {
-          "name": "Noisy airframe (can be used with Spicy)",
-          "checked": false
-        },
-        {
-          "name": "sugarK's rates",
-          "checked": false
-        }
-      ],
+      "hash": "04687315755456c9b599692b0ddafe64eec8d93372dcf992141b4adf38658c9b",
       "title": "Karate Race 6s 5\"",
       "firmware_version": [
         "4.3"
@@ -2422,194 +2604,138 @@
         "sugarK",
         "limon",
         "ctzsnooze",
-        "karateBrot"
+        "KarateBrot"
       ],
       "author": "sugarK",
-      "description": [
-        "This 6s racing tune was developed with the help of @ctzsnooze around @karatebrot’s RPM crossfade code allowing a pretty aggressive filter array which is the karate array.",
-        "This tune works well on any quality airframes and has been flown on the Viper racer (where it was developed ) BMS Js1, 533 switchback, HGLRC wind and of course @limons Open racer.",
-        "It should also work on other quality racing frames but use at your own risk as it is an aggressive tune. This tune so far has won a good number of events including the 2021 IO.",
-        "",
-        "Things to note.. YOU HAVE TO USE RPM FILTERING WITH THIS TUNE, failure to do so might result in fire and regarding Dshot600,  if your setup has errors in the motor tab using bidirectional Dshot then change to 8k/4k and dshot300.",
-        "Also this should be applied to a clean flash after you've setup your rates, swtiches, vtx tables etc. To test arm the quad with props on, it should sound clean with no grinding, if it passes that then hover test and check motor temps.",
-        "If any thing is off don't fly it!!",
-        "",
-        "SECOND NOTE.... Radio links.. 1. Make sure your radio system is totally up to date using either Edgetx or Opentx and your ADC in the hardware page is OFF 2. Go to the radio presets and apply the correct setup for your system and link speed."
+      "priority": 1000000000000
+    },
+    {
+      "fullPath": "presets/4.3/tune/karate_race_lite.txt",
+      "hash": "046940c9aead3ece7db64f4fd79abab02d5f9c144d2e37aa572694b54ecd2625",
+      "title": "Karate 'Viper Lite' Race  5\"",
+      "firmware_version": [
+        "4.3"
       ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/41",
-      "include_warning": [
-        "misc/warnings/en/rpm_filters.txt"
+      "category": "TUNE",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "karate",
+        "race",
+        "5 inch",
+        "5\"",
+        "sugarK",
+        "limon",
+        "ctzsnooze",
+        "KarateBrot",
+        "ultralite",
+        "viper",
+        "viper lite"
       ],
-      "include": [
-        "presets/4.3/tune/defaults.txt",
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "author": "sugarK",
+      "priority": 1000000000000
+    },
+    {
+      "fullPath": "presets/4.3/tune/mouseFPV_AOS_35_tune_filters.txt",
+      "hash": "0dd026ca9f1a4eaa24c758f4c1b3840401a4fb4e6ce3f5ed617fc42da23c352d",
+      "title": "AOS 3.5 V1 4s Tune | mouseFPV",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "TUNE",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "AOS",
+        "4s",
+        "freestyle",
+        "sub 250"
+      ],
+      "author": "mouseFPV",
+      "force_options_review": true,
+      "priority": 1000000000000
+    },
+    {
+      "fullPath": "presets/4.3/tune/mouseFPV_Digipick_braced.txt",
+      "hash": "16897a988ba9317a6b02beb81b3c9b5042aa4e3eee00187e37c54738502980e4",
+      "title": "Braced Toothpick/Digipick 3s/4s | mouseFPV",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "TUNE",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "FPVCycle TP3",
+        "Digipick",
+        "Toothpick",
+        "3s",
+        "3 Inch",
+        "4s",
+        "AOS T3",
+        "T3"
+      ],
+      "author": "mouseFPV",
+      "force_options_review": true,
+      "priority": 1000000000000
+    },
+    {
+      "fullPath": "presets/4.3/tune/mouseFPV_FFVCycle_Incisor_PT5_tune_filters.txt",
+      "hash": "843d79c8635d2ed5eddab912bb7aeff174faf6619321c110f19b5dc37930e884",
+      "title": "FPVCycle Incisor/Prototype 5 6s Tune | mouseFPV",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "TUNE",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "FPVCycle",
+        "5 inch",
+        "5in",
+        "6S",
+        "freestyle",
+        "GoPro",
+        "mouse fpv"
+      ],
+      "author": "mouseFPV",
+      "force_options_review": true,
+      "priority": 1000000000000
+    },
+    {
+      "fullPath": "presets/4.3/tune/mouseFPV_FPVCycle_Sonicare_tune_filters.txt",
+      "hash": "687d0579012fe8e2bd5bb1c5a6eb4f7ef9a9f2b02566a32eb304c6566b19ce89",
+      "title": "FPVCycle Sonicare 6s Tune | mouseFPV",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "TUNE",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "FPVCycle"
+      ],
+      "author": "mouseFPV",
+      "force_options_review": true,
+      "priority": 1000000000000
+    },
+    {
+      "fullPath": "presets/4.3/tune/mouseFPV_toothpick3_3s.txt",
+      "hash": "385d6c89bd737aaf3c56ff5312443b41e4a11d9887b8b23d47d1cf420a04e5d2",
+      "title": "FPVCycle Toothpick 3 3s | mouseFPV",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "TUNE",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "FPVCycle TP3",
+        "Toothpick",
+        "3s",
+        "3 inch"
+      ],
+      "author": "mouseFPV",
+      "force_options_review": true,
+      "priority": 1000000000000
     },
     {
       "fullPath": "presets/4.3/tune/reset_all.txt",
-      "hash": "2165decde88996174ea40801337b94b307f95cfb10b389738efe314c8d5431ab",
-      "options": [
-        {
-          "name": "PID values",
-          "checked": true
-        },
-        {
-          "name": "PID Sliders",
-          "checked": true
-        },
-        {
-          "name": "iTerm Relax",
-          "checked": true
-        },
-        {
-          "name": "iTerm Windup",
-          "checked": true
-        },
-        {
-          "name": "iTerm Rotation",
-          "checked": true
-        },
-        {
-          "name": "DMax settings",
-          "checked": true
-        },
-        {
-          "name": "TPA",
-          "checked": true
-        },
-        {
-          "name": "AntiGravity",
-          "checked": true
-        },
-        {
-          "name": "Feedforward",
-          "checked": true
-        },
-        {
-          "name": "PID Sum Limit",
-          "checked": true
-        },
-        {
-          "name": "Yaw spin recovery auto",
-          "checked": true
-        },
-        {
-          "name": "Arm only while level",
-          "checked": true
-        },
-        {
-          "name": "Power on arm grace time 5",
-          "checked": true
-        },
-        {
-          "name": "Deadbands to zero",
-          "checked": true
-        },
-        {
-          "name": "Min check 1070",
-          "checked": true
-        },
-        {
-          "name": "Min throttle 1050",
-          "checked": true
-        },
-        {
-          "name": "Mixer type default",
-          "checked": true
-        },
-        {
-          "name": "Angle and Horizon reset",
-          "checked": true
-        },
-        {
-          "name": "Level Race Mode off",
-          "checked": true
-        },
-        {
-          "name": "Motor output limit 100",
-          "checked": true
-        },
-        {
-          "name": "Thrust Linear off",
-          "checked": true
-        },
-        {
-          "name": "Throttle limit off",
-          "checked": true
-        },
-        {
-          "name": "Throttle curve flat",
-          "checked": true
-        },
-        {
-          "name": "Throttle boost reset",
-          "checked": true
-        },
-        {
-          "name": "VBat Sag Compensation off",
-          "checked": true
-        },
-        {
-          "name": "Voltage monitoring reset",
-          "checked": true
-        },
-        {
-          "name": "Full pack voltage telemetry",
-          "checked": true
-        },
-        {
-          "name": "DShot Telemetry (off)",
-          "checked": true
-        },
-        {
-          "name": "Dynamic idle off & reset",
-          "checked": true
-        },
-        {
-          "name": "Runaway takeoff prevention on",
-          "checked": true
-        },
-        {
-          "name": "Crash recovery settings",
-          "checked": true
-        },
-        {
-          "name": "Turtle mode settings",
-          "checked": true
-        },
-        {
-          "name": "Acro trainer settings",
-          "checked": true
-        },
-        {
-          "name": "Launch control settings",
-          "checked": true
-        },
-        {
-          "name": "Absolute control (off)",
-          "checked": true
-        },
-        {
-          "name": "PIDs at min throttle (on)",
-          "checked": true
-        },
-        {
-          "name": "Acceleration limits (off)",
-          "checked": true
-        },
-        {
-          "name": "Integrated yaw (off)",
-          "checked": true
-        },
-        {
-          "name": "Gyro Cal first arm (off)",
-          "checked": true
-        },
-        {
-          "name": "Transient throttle limit (off)",
-          "checked": true
-        }
-      ],
+      "hash": "db400b440af2f5cc25d0980fcc25cc5712f71f5ba843fcbf8020d464f6fedcb2",
       "title": "Reset 4.3 Tune parameters, complete listing",
       "firmware_version": [
         "4.3"
@@ -2625,176 +2751,11 @@
         "default"
       ],
       "author": "Betaflight",
-      "description": [
-        "Checked tune related parameters will be reset to defaults.",
-        "Un-check the parameters you want to keep at current values."
-      ]
+      "priority": 0
     },
     {
       "fullPath": "presets/4.3/tune/reset_some.txt",
-      "hash": "35e006053f715e3da438f75a3109a5b18432d41fd78f37472f962eb667d64d95",
-      "options": [
-        {
-          "name": "PID values",
-          "checked": false
-        },
-        {
-          "name": "PID Sliders",
-          "checked": false
-        },
-        {
-          "name": "iTerm Relax",
-          "checked": false
-        },
-        {
-          "name": "iTerm Windup",
-          "checked": false
-        },
-        {
-          "name": "iTerm Rotation",
-          "checked": false
-        },
-        {
-          "name": "DMax settings",
-          "checked": false
-        },
-        {
-          "name": "TPA",
-          "checked": false
-        },
-        {
-          "name": "AntiGravity",
-          "checked": false
-        },
-        {
-          "name": "Feedforward",
-          "checked": false
-        },
-        {
-          "name": "PID Sum Limit",
-          "checked": false
-        },
-        {
-          "name": "Yaw spin recovery auto",
-          "checked": false
-        },
-        {
-          "name": "Arm only while level",
-          "checked": false
-        },
-        {
-          "name": "Power on arm grace time 5",
-          "checked": false
-        },
-        {
-          "name": "Deadbands to zero",
-          "checked": false
-        },
-        {
-          "name": "Min check 1070",
-          "checked": false
-        },
-        {
-          "name": "Min throttle 1050",
-          "checked": false
-        },
-        {
-          "name": "Mixer type default",
-          "checked": false
-        },
-        {
-          "name": "Angle and Horizon reset",
-          "checked": false
-        },
-        {
-          "name": "Level Race Mode off",
-          "checked": false
-        },
-        {
-          "name": "Motor output limit 100",
-          "checked": false
-        },
-        {
-          "name": "Thrust Linear off",
-          "checked": false
-        },
-        {
-          "name": "Throttle limit off",
-          "checked": false
-        },
-        {
-          "name": "Throttle curve flat",
-          "checked": false
-        },
-        {
-          "name": "Throttle boost reset",
-          "checked": false
-        },
-        {
-          "name": "VBat Sag Compensation off",
-          "checked": false
-        },
-        {
-          "name": "Voltage monitoring reset",
-          "checked": false
-        },
-        {
-          "name": "Full pack voltage telemetry",
-          "checked": false
-        },
-        {
-          "name": "DShot Telemetry (off)",
-          "checked": false
-        },
-        {
-          "name": "Dynamic idle off & reset",
-          "checked": false
-        },
-        {
-          "name": "Runaway takeoff prevention on",
-          "checked": false
-        },
-        {
-          "name": "Crash recovery settings",
-          "checked": false
-        },
-        {
-          "name": "Turtle mode settings",
-          "checked": false
-        },
-        {
-          "name": "Acro trainer settings",
-          "checked": false
-        },
-        {
-          "name": "Launch control settings",
-          "checked": false
-        },
-        {
-          "name": "Absolute control (off)",
-          "checked": false
-        },
-        {
-          "name": "PIDs at min throttle (on)",
-          "checked": false
-        },
-        {
-          "name": "Acceleration limits (off)",
-          "checked": false
-        },
-        {
-          "name": "Integrated yaw (off)",
-          "checked": false
-        },
-        {
-          "name": "Gyro Cal first arm (off)",
-          "checked": false
-        },
-        {
-          "name": "Transient throttle limit (off)",
-          "checked": false
-        }
-      ],
+      "hash": "94c3a7ddfbc201135425fdf473d3480ddbbf4a498f0206d8508e19f75cc56964",
       "title": "Reset selected 4.3 Tune related settings.",
       "firmware_version": [
         "4.3"
@@ -2810,36 +2771,32 @@
         "partial"
       ],
       "author": "Betaflight",
-      "description": [
-        "Check the tune parameters that you want to reset to defaults.",
-        "Un-checked parameters will remain at current values."
-      ]
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.3/tune/Street_League_LeadFingers.txt",
+      "hash": "89cad2a7ae168d8ffa1d007e5c968c9306941fe720f4cf5bb77b72da1c430a97",
+      "title": "Street League LeadFingers PIDtoolbox tune",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "TUNE",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "Street League",
+        "StreetLeague",
+        "Street",
+        "League",
+        "LeadFingers",
+        "PIDtoolbox",
+        "7\""
+      ],
+      "author": "LeadFingers",
+      "priority": 1000000000000
     },
     {
       "fullPath": "presets/4.3/tune/SupaflyFPV_Freestyle_5_Inch_EasyTune.txt",
-      "hash": "2d52fbbb8aeb22170459b74d5b788ed80bb5d9952f2e8009cb07b103117615d3",
-      "options": [
-        {
-          "name": "RPM filtering",
-          "checked": true
-        },
-        {
-          "name": "4s Lipo with HD Cam (2400-2700kv motors)",
-          "checked": true
-        },
-        {
-          "name": "4s Lipo with No HD Cam (2400-2700kv motors)",
-          "checked": false
-        },
-        {
-          "name": "6s Lipo with HD Cam (1750 - 1950kv motors)",
-          "checked": false
-        },
-        {
-          "name": "6s Lipo with No HD Cam (1750 - 1950kv motors)",
-          "checked": false
-        }
-      ],
+      "hash": "e11eff91a7ec38053f58d146d2db90ee4d7f1aea39b6de5336616298095cb3b7",
       "title": "SupaflyFPV Freestyle 5 Inch",
       "firmware_version": [
         "4.3"
@@ -2856,47 +2813,11 @@
         "5\""
       ],
       "author": "SupaflyFPV",
-      "description": [
-        "SupaflyFPV Community Freestyle Preset for 5 Inch Builds",
-        "",
-        "Select the option for your build with or without HD camera (eg GoPro) as the baseline.",
-        "",
-        "Half to one click up or down Master Slider to tweak the tune - in OSD or Configurator.",
-        "",
-        "For a Master Slider setting tailored to your Lipo and Motor Kv go here: https://tinyurl.com/SupaflyFPV",
-        "",
-        "RPM Filtering for best performance (default) - or de-select for Non RPM Setup (check esc compatibility).",
-        "",
-        "If using F7/H7 Flight Controller run 8k Pidloop and turn off Gyro Low Pass Filter 2 for max performance.",
-        "",
-        "Enjoy!"
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/124",
-      "include_warning": [
-        "misc/warnings/en/rpm_filters.txt"
-      ],
-      "include": [
-        "presets/4.3/tune/defaults.txt",
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "priority": 1000000000000
     },
     {
       "fullPath": "presets/4.3/tune/SupaflyFPV_Freestyle_6_and_EasyTune.txt",
-      "hash": "4411b1554066234acca3b0b812ca1c84f290096dcffb38f485a5fc8c112ddec7",
-      "options": [
-        {
-          "name": "RPM filtering",
-          "checked": true
-        },
-        {
-          "name": "With HD Cam",
-          "checked": true
-        },
-        {
-          "name": "Without HD Cam",
-          "checked": false
-        }
-      ],
+      "hash": "1c8a3f90e2a53138e52a97147ea9ac89f479ba0958fbb527174ac4e53d712913",
       "title": "SupaflyFPV Freestyle 6 Inch",
       "firmware_version": [
         "4.3"
@@ -2911,47 +2832,11 @@
         "6 Inch"
       ],
       "author": "SupaflyFPV",
-      "description": [
-        "SupaflyFPV Community Freestyle Preset for 6 Inch Builds",
-        "",
-        "Select the option for your build with or without HD camera (eg GoPro) as the baseline.",
-        "",
-        "Half to one click up or down Master Slider to tweak the tune - in OSD or Configurator.",
-        "",
-        "For a Master Slider setting tailored to your Lipo and Motor Kv go here: https://tinyurl.com/SupaflyFPV",
-        "",
-        "RPM Filtering for best performance (default) - or de-select for Non RPM Setup (check esc compatibility).",
-        "",
-        "If using F7/H7 Flight Controller run 8k Pidloop and turn off Gyro Low Pass Filter 2 for max performance.",
-        "",
-        "Enjoy!"
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/124",
-      "include_warning": [
-        "misc/warnings/en/rpm_filters.txt"
-      ],
-      "include": [
-        "presets/4.3/tune/defaults.txt",
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "priority": 1000000000000
     },
     {
       "fullPath": "presets/4.3/tune/SupaflyFPV_Freestyle_7_Inch_EasyTune.txt",
-      "hash": "36335f28e15ea1335625e4abd6174335f38ad53b97ec8de618a1d569554be520",
-      "options": [
-        {
-          "name": "RPM filtering",
-          "checked": true
-        },
-        {
-          "name": "With HD Cam",
-          "checked": true
-        },
-        {
-          "name": "Without HD Cam",
-          "checked": false
-        }
-      ],
+      "hash": "476f1fcc6bf39ad883a85c31ebbc5788fecb72703a7f929e8b52fe40b96110c7",
       "title": "SupaflyFPV Freestyle 7 Inch",
       "firmware_version": [
         "4.3"
@@ -2966,47 +2851,30 @@
         "7 Inch"
       ],
       "author": "SupaflyFPV",
-      "description": [
-        "SupaflyFPV Community Freestyle Preset for 7 Inch Builds",
-        "",
-        "Select the option for your build with or without HD camera (eg GoPro) as the baseline.",
-        "",
-        "Half to one click up or down Master Slider to tweak the tune - in OSD or Configurator.",
-        "",
-        "For a Master Slider setting tailored to your Lipo and Motor Kv go here: https://tinyurl.com/SupaflyFPV",
-        "",
-        "RPM Filtering for best performance (default) - or de-select for Non RPM Setup (check esc compatibility).",
-        "",
-        "If using F7/H7 Flight Controller run 8k Pidloop and turn off Gyro Low Pass Filter 2 for max performance.",
-        "",
-        "Enjoy!"
+      "priority": 1000000000000
+    },
+    {
+      "fullPath": "presets/4.3/tune/Tehllama_533_TinyTrainer_3in_3S_TUNE_Options.txt",
+      "hash": "d16893206254ce89e24740b3b3b932abd8cacf8427c4e811cb4aecf053d60a1f",
+      "title": "FlyFive33 3in TinyTrainer 3S Tune",
+      "firmware_version": [
+        "4.3"
       ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/124",
-      "include_warning": [
-        "misc/warnings/en/rpm_filters.txt"
+      "category": "TUNE",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "TinyTrainer",
+        "533",
+        "Spec",
+        "Race",
+        "Llama"
       ],
-      "include": [
-        "presets/4.3/tune/defaults.txt",
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "author": "Daniel Appel / Tehllama",
+      "priority": 1000000000000
     },
     {
       "fullPath": "presets/4.3/tune/tiny_karate.txt",
-      "hash": "a417f87aae3f44caffc5fbf43a6b538053db73b74a94ecb762a362de739d32c5",
-      "options": [
-        {
-          "name": "Dshot600",
-          "checked": true
-        },
-        {
-          "name": "Dshot300",
-          "checked": false
-        },
-        {
-          "name": "dynamic idle",
-          "checked": true
-        }
-      ],
+      "hash": "ea36e5b17538af8d3218aedc1ee228e3b00234876ad7ae7ccad074a8a05cd4f9",
       "title": "533 TinyTrainer Karate",
       "firmware_version": [
         "4.3"
@@ -3027,25 +2895,194 @@
         "tinyTrainer"
       ],
       "author": "sugarK",
-      "description": [
-        "This racing tune was developed for the 533 TinyTrainer spec class with @Shames throwing his quad out the window of his office and sending me logs.",
-        "",
-        "Things to note.. YOU HAVE TO USE RPM FILTERING WITH THIS TUNE, failure to do so might result in fire and regarding Dshot600,  if your setup has errors in the motor tab using bidirectional Dshot then change to 8k/4k and dshot300.",
-        "SECOND NOTE.... Radio links.. 1. Make sure your radio system is totally up to date using either Edgetx or Opentx and your ADC in the hardware page is OFF 2. Go to the radio presets and apply the correct setup for your system and link speed."
+      "priority": 1000000000000
+    },
+    {
+      "fullPath": "presets/4.3/tune/UAV_tech_5in.txt",
+      "hash": "2ee1b7451191cb5ff16560b379254136cb8f5eeaf73d6895e71ee19ff90feb49",
+      "title": "UAV Tech - 5in (590-630g AUW)",
+      "firmware_version": [
+        "4.3"
       ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/81",
-      "include_warning": [
-        "misc/warnings/en/rpm_filters.txt"
+      "category": "TUNE",
+      "status": "COMMUNITY",
+      "keywords": [
+        "4S",
+        "6S",
+        "5in",
+        "5\"",
+        "freestyle"
       ],
-      "include": [
-        "presets/4.3/tune/defaults.txt",
-        "presets/4.3/filters/defaults.txt"
-      ]
+      "author": "UAV Tech (Mark Spatz)",
+      "priority": 1000000000000
+    },
+    {
+      "fullPath": "presets/4.3/tune/UAV_tech_6-7in.txt",
+      "hash": "7e7c3901d6989dfabd8bb91fe13a9983eef5d425a2f6da1ad079357096be1a2e",
+      "title": "UAV Tech - 6-7in (~700g AUW)",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "TUNE",
+      "status": "COMMUNITY",
+      "keywords": [
+        "4S",
+        "6S",
+        "6in",
+        "7in",
+        "6\"",
+        "7\"",
+        "freestyle",
+        "long range"
+      ],
+      "author": "UAV Tech (Mark Spatz)",
+      "priority": 1000000000000
+    },
+    {
+      "fullPath": "presets/4.3/tune/UAV_tech_8-9in.txt",
+      "hash": "7a86ab26a50a7e3fe1d2e506a4486e03672787ecd63b1a233989cf900fb72cea",
+      "title": "UAV Tech - 8-9in (~750g AUW)",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "TUNE",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "4S",
+        "6S",
+        "8in",
+        "9in",
+        "8\"",
+        "9\"",
+        "freestyle",
+        "long range"
+      ],
+      "author": "UAV Tech (Mark Spatz)",
+      "priority": 1000000000000
+    },
+    {
+      "fullPath": "presets/4.3/tune/UAV_tech_8-9in_Cinelifter.txt",
+      "hash": "3095ffbd6584fe3af610bbc7cc9a14b002082e644b20e7a36cffb5d792288cab",
+      "title": "UAV Tech - 8-9in Cinelifter (>2,000g AUW)",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "TUNE",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "6S",
+        "8S",
+        "8in",
+        "9in",
+        "8\"",
+        "9\"",
+        "cinelifter"
+      ],
+      "author": "UAV Tech (Mark Spatz)",
+      "priority": 1000000000000
+    },
+    {
+      "fullPath": "presets/4.3/tune/UAV_tech_Cinewhoop.txt",
+      "hash": "d408ae55e64986f84cf8d07428200b4dc88b44e3b30ef2df711818d2ecc17c4d",
+      "title": "UAV Tech - Cinewhoop",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "TUNE",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "cinewhoop"
+      ],
+      "author": "UAV Tech (Mark Spatz)",
+      "priority": 1000000000000
+    },
+    {
+      "fullPath": "presets/4.3/tune/UAV_tech_Toothpic.txt",
+      "hash": "4453e4d8a25f97a96de25e53ef29e77961cd2f2335e15205251599a28aa740af",
+      "title": "UAV Tech - Toothpic (2in to 4in)",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "TUNE",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "2S",
+        "4S",
+        "6S",
+        "toothpic",
+        "2in",
+        "3in",
+        "3.5in",
+        "4in"
+      ],
+      "author": "UAV Tech (Mark Spatz)",
+      "priority": 1000000000000
+    },
+    {
+      "fullPath": "presets/4.3/tune/UAV_tech_Whoop.txt",
+      "hash": "bb4f0552015b1e5109dac54610a82759bceba8f84fbd28909bd342095cf5347f",
+      "title": "UAV Tech - Whoop (1S & 2S)",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "TUNE",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "whoop"
+      ],
+      "author": "UAV Tech (Mark Spatz)",
+      "priority": 1000000000000
+    },
+    {
+      "fullPath": "presets/4.3/tune/whoop_ayyykayyy.txt",
+      "hash": "18a0a21b675f4c2e4719bae8d448684e58b51981f657755fe4c2f95e7eaea2c7",
+      "title": "Whoop race tune by AyyyKayyy",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "TUNE",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "whoop",
+        "65mm",
+        "1S",
+        "race",
+        "acro",
+        "tune",
+        "AyyyKayyy",
+        "meteor",
+        "whooptopia",
+        "brushless"
+      ],
+      "author": "AyyyKayyy - Anthony Knight",
+      "priority": 1000000000000
+    },
+    {
+      "fullPath": "presets/4.3/tune/whoop_justice.txt",
+      "hash": "043daa42cb5e8811871b0d2a855a9ef26c31485792ba6d79bdfb7089f2a150d2",
+      "title": "Whoop race tune by Justice",
+      "firmware_version": [
+        "4.3"
+      ],
+      "category": "TUNE",
+      "status": "EXPERIMENTAL",
+      "keywords": [
+        "whoop",
+        "65mm",
+        "1S",
+        "race",
+        "acro",
+        "tune",
+        "justice",
+        "meteor"
+      ],
+      "author": "Justice - Gary Kent",
+      "force_options_review": true,
+      "priority": 1000000000000
     },
     {
       "fullPath": "presets/4.3/vtx/defaults.txt",
-      "hash": "a7d9e6d9019134ad328b62b67b4dda294bde3bfd038385feb2d5f5584f88926b",
-      "options": [],
+      "hash": "f771542d93f15f993d39d97f9004ede104ba7dfebff45f68863aa25f30275388",
       "title": "Default 4.3 VTX settings",
       "firmware_version": [
         "4.3"
@@ -3059,15 +3096,11 @@
         "vtx"
       ],
       "author": "Betaflight",
-      "description": [
-        "Resets VTx settings and table back to 4.3 Defaults",
-        "Only the checked settings will be reset"
-      ]
+      "priority": 1000000
     },
     {
       "fullPath": "presets/4.3/vtx/defaults_vtx_tables.txt",
       "hash": "ca7751007ea115e4aef9cfc8051832205100ab4d0be45b9694d506f193cdb1d6",
-      "options": [],
       "title": "Default 4.3 VTX table settings",
       "firmware_version": [
         "4.3"
@@ -3082,24 +3115,11 @@
         "vtxtable"
       ],
       "author": "Betaflight",
-      "description": [
-        "Resets only the VTX table back to 4.3 Defaults",
-        "Only the checked settings will be reset"
-      ]
+      "priority": 1000000
     },
     {
       "fullPath": "presets/4.3/vtx/diatone_mamba_ultra_1000.txt",
-      "hash": "63f36e059b1991b90c79eecd7df8fb5a330aba52e04166faab51d712f9dbdcf0",
-      "options": [
-        {
-          "name": "NO HAM",
-          "checked": false
-        },
-        {
-          "name": "HAM",
-          "checked": true
-        }
-      ],
+      "hash": "f058b040995b0054977e5a70298cc26b699ea7c64d825e55fbf55905b3aac74e",
       "title": "Diatone Mamba Ultra 1000 VTX Tables",
       "firmware_version": [
         "4.2",
@@ -3117,54 +3137,73 @@
         "ultra 1000"
       ],
       "author": "NemesisXB",
-      "description": [
-        "VTX tables for the Diatone Mamba Ultra 1000. (IRC Tramp)",
-        "Select the the HAM option if you have a HAM license or the NO HAM if you do not.",
-        "EU users select the NO HAM option."
-      ],
-      "disclaimer": "Only select one option. All previous VTX Table settings will be reset.",
-      "include_disclaimer": [
-        "misc/disclaimer/en/vtxtable.txt"
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/107",
-      "include": [
-        "presets/4.3/vtx/defaults_vtx_tables.txt"
-      ]
+      "priority": 1000000
     },
     {
-      "fullPath": "presets/4.3/vtx/HDZero_race2.txt",
-      "hash": "202e55f8ce6319e74bcaa666a93d0c204dafb582e7e2082bf4465693a506a6bc",
-      "options": [
-        {
-          "name": "use displayport on uart 1",
-          "checked": false
-        },
-        {
-          "name": "use displayport on uart 2",
-          "checked": false
-        },
-        {
-          "name": "use displayport on uart 3",
-          "checked": false
-        },
-        {
-          "name": "use displayport on uart 4",
-          "checked": false
-        },
-        {
-          "name": "use displayport on uart 5",
-          "checked": false
-        },
-        {
-          "name": "use displayport on uart 6",
-          "checked": false
-        },
-        {
-          "name": "map to displayport",
-          "checked": true
-        }
+      "fullPath": "presets/4.3/vtx/Eachine_Nano_V2.txt",
+      "hash": "501c014c05fd0d9b46c0cab00c6dc9edabee5dfb89ce8e2e5a9bdda03778c93b",
+      "title": "Eachine Nano V2 VTX Table",
+      "firmware_version": [
+        "4.2",
+        "4.3"
       ],
-      "title": "HDZero race 2",
+      "category": "VTX",
+      "status": "COMMUNITY",
+      "keywords": [
+        "eachine",
+        "Eachine",
+        "nano",
+        "Nano",
+        "irc",
+        "IRC",
+        "tramp",
+        "TRAMP",
+        "Tramp",
+        "IRC Tramp",
+        "irc tramp",
+        "IRC TRAMP"
+      ],
+      "author": "MrAlucardDante",
+      "priority": 1000000
+    },
+    {
+      "fullPath": "presets/4.3/vtx/eachine_vtx.txt",
+      "hash": "50d3edb7b19c927fd335c2d9a916cdea88a05d56628dcabe509a6ab08eda5603",
+      "title": "Eachine VTX Tables",
+      "firmware_version": [
+        "4.2",
+        "4.3"
+      ],
+      "category": "VTX",
+      "status": "COMMUNITY",
+      "keywords": [
+        "eachine",
+        "Eachine",
+        "nano",
+        "Nano",
+        "irc",
+        "IRC",
+        "tramp",
+        "TRAMP",
+        "Tramp",
+        "IRC Tramp",
+        "irc tramp",
+        "IRC TRAMP",
+        "tbs",
+        "sa",
+        "tbs sa",
+        "smartaudio",
+        "smart audio",
+        "Smart",
+        "Audio TBS"
+      ],
+      "author": "KMfpv",
+      "priority": 1000000
+    },
+    {
+      "fullPath": "presets/4.3/vtx/HDZero.txt",
+      "hash": "802f5dab99316d7b0c22bd4813817eb7a207d3c401adfc6a90cd3966b64fd12f",
+      "title": "HDZero VTXs",
       "firmware_version": [
         "4.2",
         "4.3"
@@ -3176,49 +3215,68 @@
         "vtx table",
         "HDzero",
         "divimath",
-        "shark bite",
-        "SA 2.1"
+        "SA 2.1",
+        "digital",
+        "whoop",
+        "whoop lite",
+        "race v1",
+        "race v2",
+        "freestyle",
+        "tx5m.1",
+        "karatebrot"
       ],
       "author": "sugarK",
-      "description": [
-        "VTX table for HDZero race 2",
-        "The information provided on this preset is for educational and entertainment purposes only. Betaflight makes no representations as to the safety or legality of the use of any information provided herein. End users assume all responsibility and liability for ensuring they are complying with all relevant laws and regulations.",
-        "----------",
-        "Using the VTX tables as provided may be in breach of your local RF laws. It is up to the end user to research and comply with local regulations and in using these presets the user assumes all liability associated with breaching local regulations."
+      "priority": 1000000
+    },
+    {
+      "fullPath": "presets/4.3/vtx/NanoHawk.txt",
+      "hash": "86e37f00a44c33cca95989a0ce78735c12744dbe230a373278aca86b3c159b19",
+      "title": "Emax NanoHawk 1S SmartAudio 2.0 VTX table",
+      "firmware_version": [
+        "4.2",
+        "4.3"
       ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/89",
-      "include": [
-        "presets/4.3/vtx/defaults_vtx_tables.txt"
+      "category": "VTX",
+      "status": "COMMUNITY",
+      "keywords": [
+        "vtx",
+        "nanohawk",
+        "emax",
+        "smartaudio",
+        "sa",
+        "sa20",
+        "sa2.0"
       ],
-      "include_disclaimer": [
-        "misc/disclaimer/en/vtxtable.txt"
-      ]
+      "author": "Sjoer van der Ploeg",
+      "priority": 1000000
+    },
+    {
+      "fullPath": "presets/4.3/vtx/OpenVTx.txt",
+      "hash": "1cbb15ca60cd1392001158a2c73857d7b1481255c09723dcdf1d037bc1edb5fe",
+      "title": "OpenVTx",
+      "firmware_version": [
+        "4.2",
+        "4.3"
+      ],
+      "category": "VTX",
+      "status": "COMMUNITY",
+      "keywords": [
+        "vtx",
+        "vtx table",
+        "OpenVTx",
+        "TRAMP",
+        "SA 2.1",
+        "E7082VM",
+        "OVX300",
+        "OVX303",
+        "OP400"
+      ],
+      "author": "Jye Smith",
+      "priority": 1000000
     },
     {
       "fullPath": "presets/4.3/vtx/rush_sa2.1_vtx_tables.txt",
-      "hash": "f557a5374eff493eb7f27191da8be4c63fd272fdc39080d18c624f9698e33346",
-      "options": [
-        {
-          "name": "48CH",
-          "checked": false
-        },
-        {
-          "name": "Tank Ultimate Plus/Mini/II",
-          "checked": true
-        },
-        {
-          "name": "Tiny Tank",
-          "checked": false
-        },
-        {
-          "name": "Tank Racing",
-          "checked": false
-        },
-        {
-          "name": "Tank Solo",
-          "checked": false
-        }
-      ],
+      "hash": "22aadeaaf187206e8e33fe426586de11dcfb1ea0ef3e56850ff9aabd37078b14",
       "title": "Rush Tiny Tank, Tank Racing, Tank Ultimate Plus/Mini/II, and Tank Solo VTX tables",
       "firmware_version": [
         "4.2",
@@ -3237,32 +3295,11 @@
         "tiny tank"
       ],
       "author": "Directory",
-      "description": [
-        "VTX tables for the Rush Tiny Tank, Rush Tank Racing, Rush Tank Ultimate Plus, Rush Tank Ultimate II, and the Rush Tank Solo.",
-        "Select in the options which model your particular rush VTX is. If it is not listed below it may not work because these VTX tables are meant for SA2.1 only. Older Rush VTX's (like the original tank ultimate) use an older SmartAudio protocol such as v1.1. These tables are by default the 37CH version for the US. Select 48CH to unlock more frequencies."
-      ],
-      "disclaimer": "Only select one VTX model. All previous VTX settings will be reset. Some frequencies in BAND E have been replaced for the non 48CH version.",
-      "include_disclaimer": [
-        "misc/disclaimer/en/vtxtable.txt"
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/78",
-      "include": [
-        "presets/4.3/vtx/defaults.txt"
-      ]
+      "priority": 1000000
     },
     {
       "fullPath": "presets/4.3/vtx/speedybee_tx800.txt",
-      "hash": "23b289a0b51770f8f6c0ba648ac0d7cc6685edf7216cb13041740a56c8f44bbf",
-      "options": [
-        {
-          "name": "EU",
-          "checked": false
-        },
-        {
-          "name": "US",
-          "checked": true
-        }
-      ],
+      "hash": "6fc6fff69555a43b7fb37943479e868403cd571549ea6b4d905c0d633f5968ee",
       "title": "SpeedyBee TX800 VTX Tables",
       "firmware_version": [
         "4.2",
@@ -3277,23 +3314,11 @@
         "tx800"
       ],
       "author": "NemesisXB",
-      "description": [
-        "VTX tables for the SpeedyBee TX800.",
-        "Select the regulatory domain in the options (EU or US)."
-      ],
-      "disclaimer": "Only select one regulatory option. All previous VTX Table settings will be reset.",
-      "include_disclaimer": [
-        "misc/disclaimer/en/vtxtable.txt"
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/105",
-      "include": [
-        "presets/4.3/vtx/defaults_vtx_tables.txt"
-      ]
+      "priority": 1000000
     },
     {
       "fullPath": "presets/4.3/vtx/tramp_nano_and_HV.txt",
       "hash": "0a496b6215aae4a72cbe0c1c1a3bc5d225609ebf25318c428abd6ad383e9bcfe",
-      "options": [],
       "title": "IRC Tramp Nano and HV",
       "firmware_version": [
         "4.2",
@@ -3310,21 +3335,11 @@
         "nano"
       ],
       "author": "sugarK",
-      "description": [
-        "VTX table for Rush Tank 30x30, Mini and Ultimate Plus. Note this table is as provided by the manufacture.",
-        "The information provided on this preset is for educational and entertainment purposes only. Betaflight makes no representations as to the safety or legality of the use of any information provided herein. End users assume all responsibility and liability for ensuring they are complying with all relevant laws and regulations.",
-        "----------",
-        "Using the VTX tables as provided may be in breach of your local RF laws. It is up to the end user to research and comply with local regulations and in using these presets the user assumes all liability associated with breaching local regulations."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/31",
-      "include_disclaimer": [
-        "misc/disclaimer/en/vtxtable.txt"
-      ]
+      "priority": 1000000
     },
     {
       "fullPath": "presets/4.3/vtx/Unify_EVO_5G8_HV_SA.txt",
       "hash": "1065525a75ef9c3c4d5adff000011c2e65a13aab8cac5755dae5571fd3faa605",
-      "options": [],
       "title": "TBS Unify EVO 5G8 (HV) - SA 2.1",
       "firmware_version": [
         "4.2",
@@ -3343,21 +3358,11 @@
         "EVO"
       ],
       "author": "sugarK",
-      "description": [
-        "VTX table for Rush Tank 30x30, Mini and Ultimate Plus. Note this table is as provided by the manufacture.",
-        "The information provided on this preset is for educational and entertainment purposes only. Betaflight makes no representations as to the safety or legality of the use of any information provided herein. End users assume all responsibility and liability for ensuring they are complying with all relevant laws and regulations.",
-        "----------",
-        "Using the VTX tables as provided may be in breach of your local RF laws. It is up to the end user to research and comply with local regulations and in using these presets the user assumes all liability associated with breaching local regulations."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/31",
-      "include_disclaimer": [
-        "misc/disclaimer/en/vtxtable.txt"
-      ]
+      "priority": 1000000
     },
     {
       "fullPath": "presets/4.3/vtx/Unify_Pro32_HV_SA2_1.txt",
       "hash": "c7bb36ac2e9d27f3caae5ffaeae2f16c7e431ff8ea36f13a2a2c15794e7442e5",
-      "options": [],
       "title": "TBS Unify Pro32 HV SA 2.1",
       "firmware_version": [
         "4.2",
@@ -3375,21 +3380,11 @@
         "SA 2.1"
       ],
       "author": "sugarK",
-      "description": [
-        "VTX table for TBS Unify Pro32 HV SA 2.1. NOTE 1. Max power set to 36db as it will force the vtx to ouput max power. Note 2. this table is as provided by the manufacture.",
-        "The information provided on this preset is for educational and entertainment purposes only. Betaflight makes no representations as to the safety or legality of the use of any information provided herein. End users assume all responsibility and liability for ensuring they are complying with all relevant laws and regulations.",
-        "----------",
-        "Using the VTX tables as provided may be in breach of your local RF laws. It is up to the end user to research and comply with local regulations and in using these presets the user assumes all liability associated with breaching local regulations."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/31",
-      "include_disclaimer": [
-        "misc/disclaimer/en/vtxtable.txt"
-      ]
+      "priority": 1000000
     },
     {
       "fullPath": "presets/4.3/vtx/Unify_Pro32_Nano_SA2_1.txt",
       "hash": "d0ba39e4ac3552a2f52aad85abc010cae1cc799e33adc192acd26cf704bac62f",
-      "options": [],
       "title": "TBS Unify Pro32 Nano - SA 2.1",
       "firmware_version": [
         "4.2",
@@ -3407,21 +3402,11 @@
         "SA 2.1"
       ],
       "author": "sugarK",
-      "description": [
-        "VTX table for TBS Unify Pro32 Nano SA 2.1. Note 1. Max power set to 36db as it will force the vtx to ouput max power. Note 2. This table is as provided by the manufacture.",
-        "The information provided on this preset is for educational and entertainment purposes only. Betaflight makes no representations as to the safety or legality of the use of any information provided herein. End users assume all responsibility and liability for ensuring they are complying with all relevant laws and regulations.",
-        "----------",
-        "Using the VTX tables as provided may be in breach of your local RF laws. It is up to the end user to research and comply with local regulations and in using these presets the user assumes all liability associated with breaching local regulations."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/31",
-      "include_disclaimer": [
-        "misc/disclaimer/en/vtxtable.txt"
-      ]
+      "priority": 1000000
     },
     {
       "fullPath": "presets/4.3/vtx/Unify_Pro_HV_800mw_Unify_Pro_V3_SA_2_0.txt",
       "hash": "0c01584517d2c091c6331570f4cb3270841a831ae794bf2cb7bf6db9d58e12a9",
-      "options": [],
       "title": "TBS Unify Pro HV 800mw / TBS Unify Pro V3 (5v) SA 2.0",
       "firmware_version": [
         "4.2",
@@ -3438,21 +3423,11 @@
         "SA 2.0"
       ],
       "author": "sugarK",
-      "description": [
-        "VTX table for both the TBS Unify Pro HV 800mw and TBS Unify Pro V3 (5v) SA 2.0. Note this table is as provided by the manufacture.",
-        "The information provided on this preset is for educational and entertainment purposes only. Betaflight makes no representations as to the safety or legality of the use of any information provided herein. End users assume all responsibility and liability for ensuring they are complying with all relevant laws and regulations.",
-        "----------",
-        "Using the VTX tables as provided may be in breach of your local RF laws. It is up to the end user to research and comply with local regulations and in using these presets the user assumes all liability associated with breaching local regulations."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/31",
-      "include_disclaimer": [
-        "misc/disclaimer/en/vtxtable.txt"
-      ]
+      "priority": 1000000
     },
     {
       "fullPath": "presets/4.3/vtx/Unify_Pro_HV_Race_Not_Race_V2_SA2_0.txt",
       "hash": "5eca61072af03cbd13c0b00e6a44e72a2348d72e5f7067df0bb8a44905cf616d",
-      "options": [],
       "title": "TBS Unify Pro HV Race (Not Race V2) SA 2.0",
       "firmware_version": [
         "4.2",
@@ -3469,21 +3444,11 @@
         "SA 2.0"
       ],
       "author": "sugarK",
-      "description": [
-        "VTX table for TBS Unify Pro HV Race (Not Race V2) SA 2.0. Note this table is as provided by the manufacture.",
-        "The information provided on this preset is for educational and entertainment purposes only. Betaflight makes no representations as to the safety or legality of the use of any information provided herein. End users assume all responsibility and liability for ensuring they are complying with all relevant laws and regulations.",
-        "----------",
-        "Using the VTX tables as provided may be in breach of your local RF laws. It is up to the end user to research and comply with local regulations and in using these presets the user assumes all liability associated with breaching local regulations."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/31",
-      "include_disclaimer": [
-        "misc/disclaimer/en/vtxtable.txt"
-      ]
+      "priority": 1000000
     },
     {
       "fullPath": "presets/4.3/vtx/Unify_Pro_HV_Race_V2 _SA2_1.txt",
       "hash": "258d45b78ab26c8882e81bd1525b5d2169189936c952268a702c887e34d7ec10",
-      "options": [],
       "title": "TBS Unify Pro HV Race (Not Race V2) - SA 2.0",
       "firmware_version": [
         "4.2",
@@ -3500,21 +3465,11 @@
         "SA 2.0"
       ],
       "author": "sugarK",
-      "description": [
-        "VTX table for TBS Unify Pro HV Race (Not Race V2) - SA 2.0.  Note this table is as provided by the manufacture",
-        "The information provided on this preset is for educational and entertainment purposes only. Betaflight makes no representations as to the safety or legality of the use of any information provided herein. End users assume all responsibility and liability for ensuring they are complying with all relevant laws and regulations.",
-        "----------",
-        "Using the VTX tables as provided may be in breach of your local RF laws. It is up to the end user to research and comply with local regulations and in using these presets the user assumes all liability associated with breaching local regulations."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/31",
-      "include_disclaimer": [
-        "misc/disclaimer/en/vtxtable.txt"
-      ]
+      "priority": 1000000
     },
     {
       "fullPath": "presets/4.3/vtx/Unify_Pro_Nano_SA2_0_lite.txt",
       "hash": "40ad77766336eca6fb8070e8731678ec29f9cf964cfeb2833de9a2d1f1e1e75d",
-      "options": [],
       "title": "TBS Unify Pro Nano (Not Pro32 Nano) SA 2.0 lite",
       "firmware_version": [
         "4.2",
@@ -3531,16 +3486,7 @@
         "SA 2.0 lite"
       ],
       "author": "sugarK",
-      "description": [
-        "VTBS Unify Pro Nano (Not Pro32 Nano) SA 2.0 lite (requires 3.3V level and soft or hardware pull low). See TBS website for details. Note this table is as provided by the manufacture.",
-        "The information provided on this preset is for educational and entertainment purposes only. Betaflight makes no representations as to the safety or legality of the use of any information provided herein. End users assume all responsibility and liability for ensuring they are complying with all relevant laws and regulations.",
-        "----------",
-        "Using the VTX tables as provided may be in breach of your local RF laws. It is up to the end user to research and comply with local regulations and in using these presets the user assumes all liability associated with breaching local regulations."
-      ],
-      "discussion": "https://github.com/betaflight/firmware-presets/pull/31",
-      "include_disclaimer": [
-        "misc/disclaimer/en/vtxtable.txt"
-      ]
+      "priority": 1000000
     }
   ]
 }

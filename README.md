@@ -2,13 +2,15 @@
 
 A simple way to configure your Betaflight Flight Controller Firmware settings.
 
-- [Introduction](https://github.com/betaflight/firmware-presets#introduction)
-- [Applying and using Presets](https://github.com/betaflight/firmware-presets#applying-and-using-presets)
-- [Providing feedback](https://github.com/betaflight/firmware-presets#providing-feedback)
-- [Creating new presets](https://github.com/betaflight/firmware-presets#creating-new-presets)
-- [Modifying existing presets](https://github.com/betaflight/firmware-presets#modifying-existing-presets)
-- [Preset specifications](https://github.com/betaflight/firmware-presets#preset-specifications)
-- [Credits](https://github.com/betaflight/firmware-presets#credits)
+- [Introduction](#introduction)
+- [Applying and using Presets](#applying-and-using-presets)
+- [Providing feedback](#providing-feedback)
+- [Custom sources](#custom-sources)
+- [Creating new presets](#creating-new-presets)
+- [Tips for preset authors](#tips-for-authors)
+- [Modifying existing presets](#modifying-existing-presets)
+- [Preset specifications](#preset-specifications)
+- [Credits](#credits)
 
 ## Introduction
 
@@ -40,6 +42,27 @@ Currently, the best way to provide feedback is by adding a comment to the Pull R
 
 Alternatively, search the [Firmware Presets Pull Request page](https://github.com/betaflight/firmware-presets/pulls).
 
+## Custom sources
+
+Developers and tuners can add a link in Configurator to their own Preset repository.  This allows developers to test their Presets locally before submitting PRs, allows tuners or board suppliers to develop and share custom Presets, and allows individuals to keep an online backup of their personal presets.
+
+Steps are:
+- clone the Presets repository to your GitHub account
+- make a separate branch from Master and create your own Presets there
+- run `node indexer/indexer.js` and `node indexer/check.js`
+- push your branch to Github
+
+To use a custom Preset source:
+- in Configurator, go to Presets > Preset Sources
+- set the URL field to `https://github.com/sourceGithubAccountName/firmware-presets/``
+- set the Github branch field to the branch name you pushed
+
+Any end-user can then apply your custom presets.
+
+Unless you rebase to master to ensure that this branch is up to date with Betaflight, any existing Presets may become out of date.  
+
+You may choose to remove all the other Presets, leaving only those you have made, and you may replace or remove the directory structure.  You must re-build the index file and push it to Github after file or directory changes.  
+
 ## Creating new presets
 
 **Submissions for new presets** must be made with a GitHub [Firmware Preset Pull Request](https://github.com/betaflight/firmware-presets/pulls) (PR):
@@ -68,6 +91,20 @@ Remember to include the pull request URL in the `Discussion` field.
 - should be responsive to feedback from users via comments to the originating PR
 - is responsible for maintaining compatibility with future Betaflight firmware releases
 
+## Tips for authors
+
+If you want to add your presets to the **official Betaflight Presets Repo**, and thinking to open your first Pull Request (PR), please consider the following tips and common mistakes:
+1. Do **not** include index files updates in the PR. You can run check.js locally or run indexer in a separate branch, or just don't `git add` it to the commit.
+2. Split the separate presets into separate PRs. Especially if your presets are not connected with each other.
+3. Don't create multiple PRs if you are just starting, start with just one PR. Check it time-to-time if there are any corrections suggested, wait for it to be merged and then proceed with the next presets you wanted to add.
+4. PR must include only one commit. Exceptions are very rare. If you happen to have multiple commits, there are multiple ways to make 1 commit out of them (squash, soft reset etc).
+5. Make sure `#$ DESCRIPTION` explains nicely what the preset is doing. You can even include pictures of modes/osd if you use `#$ PARSER: MARKED`. User must know what he is getting.
+6. Always self-check your PR in the GitHub web-view. Do it **every** time when you make a new PR, or if you update it. Respect the review team. If you don't check the web-view of your PR upon updates, why would they check. The main things to check in the web view: number of commits (should be one) and double check the code changes (Files changed tab).
+7. Don't forget about `#$ DISCUSSION: link/to/your/pr`
+8. If you messed up your PR and would like to start from scratch, do **not** close your existing PR. You can alwas start from scratch without closing your PR. Just save your preset somewhere locally on your PC, then remove your local branch and create a branch with the same name. When you done adding your preset to the branch just force-push it to the `origin`. Your PR is connected with your branch name.
+
+And remember - a new preset file needs a new PR. Modification for the existing preset also requires a new PR.
+
 ## Modifying existing presets
 
 Presets may be modified, with or without permission of the author, by a subsequent pull request.
@@ -87,7 +124,7 @@ A Preset must include a field structure that complies with the specifications be
 
 **Optional fields**
 ```
-    KEYWORDS, AUTHOR, DESCRIPTION, INCLUDE, OPTION, DISCUSSION, DISCLAIMER, INCLUDE_DISCLAIMER, WARNING, INCLUDE_WARNING, HIDDEN
+    KEYWORDS, AUTHOR, DESCRIPTION, INCLUDE, OPTION, FORCE_OPTIONS_REVIEW, OPTION_GROUP BEGIN, DISCUSSION, DISCLAIMER, INCLUDE_DISCLAIMER, WARNING, INCLUDE_WARNING, HIDDEN
 ```
 All field tags must be:
 - preceded with `#$ `, 
@@ -105,8 +142,10 @@ All field tags must be:
 | KEYWORDS | Choose carefully.  Make it easy for your intended user to find your preset with keywords that you expect they will use.  Comma separate each entry. |
 | AUTHOR | Your Github name or nickname. |
 | DESCRIPTION| Clearly explain what will be changed, and, where relevant, what will not be changed. For example, if  filter setup requires RPM filtering, be sure to state this. Each ``#$ DESCRIPTION:` line results in a separate paragraph.  A blank `#$ DESCRIPTION:` line results in a blank line between paragraphs. All description text should be placed above any includes or options. |
+| FORCE_OPTIONS_REVIEW | Opens a dialog advising the user to review the options if they have not done so before applying the Preset.|
 | INCLUDE | Inserts data from one or more separate Presets ahead of the CLI commands of this Preset.  Useful to enforce defaults ahead of your commands. See details below.|
-| OPTION | Commands within `OPTION` tags present the user with a checkbox to apply, or not apply, the enclosed commands.  The default check-box behaviour can be specified.  Each `OPTION` group must have a unique name. For more info, [click here](https://github.com/betaflight/firmware-presets#OPTION). |
+| OPTION | Commands within `OPTION` tags present the user with a checkbox to apply, or not apply, the enclosed commands.  The default check-box behaviour can be specified.  Each `OPTION` must have a unique name. For more info, [click here](https://github.com/betaflight/firmware-presets#OPTION). |
+| OPTION_GROUP | Text to appear before a group of Options. |
 | DISCLAIMER | Field containing text for a disclaimer. |
 | INCLUDE_DISCLAIMER | path to file containing text for a disclaimer, starting from `presets/`` |
 | WARNING | Field containing text for a warning. Intended to be a final dialog before accepting the Preset |
@@ -129,6 +168,7 @@ All field tags must be:
 #$ DISCLAIMER: Text of disclaimer (mandatory for VTx Presets)
 #$ WARNING: Text of warning
 #$ DISCUSSION: https://github.com/betaflight/firmware-presets/pull/nn
+#$ FORCE_OPTIONS_REVIEW
 
 #$ INCLUDE: presets/4.3/rates/defaults.txt
 
@@ -144,12 +184,17 @@ All field tags must be:
 <cli command m>
 #$ OPTION END
 
+#$ OPTION_GROUP BEGIN: This group name
 #$ OPTION BEGIN (UNCHECKED): Region 2 name
 <cli command m + 1>
 <cli command m + 2>
-...
-<cli command k>
 #$ OPTION END
+#$ OPTION BEGIN (UNCHECKED): Region 3 name
+<cli command j + 1>
+<cli command j + 2>
+<cli command j + 3>
+#$ OPTION END
+#$ OPTION_GROUP END
 ```
 
 ### Categories
@@ -203,7 +248,12 @@ Example:  `#$ INCLUDE: presets/4.3/category/preset_x.txt`
 
 The Preset author sets the checkbox default to be ticked or un-ticked, and specifies the label next to the checkbox.
 
-They work similar to the C# preprocessor directive `#region`.
+If the author wants to warn the user to review the options, they can make a dialog appear saying, "Please review the list of options" by including this line in the header:
+```
+#$ FORCE_OPTIONS_REVIEW: TRUE
+````
+
+Options work similar to the C# preprocessor directive `#region`.
 
 One example where `OPTION` may be useful is in a `BNF` or `TUNE` Preset. The Preset could provide different options for different radio protocols, eg SBUS, Crossfire, Ghost, etc. The user can then select the radio protocol to be used when the preset is applied.
 
@@ -211,15 +261,28 @@ Another example could be to provide different RC_Smoothing settings, to suit rac
 
 Another example is where a user may want to retain a personal setting, eg motor output limit, when applying a TUNE that might also like to set that value to some specific value.  Here the tuner can give an option to use their value, but allow the user to not accept that suggestion.
 
-An `OPTION` region starts with an `#$ OPTION BEGIN: <option name>` tag. 
+An `OPTION` region starts with an `#$ OPTION BEGIN: <option name>` tag, and must end with an `#$ OPTION END` tag.  The payload of CLI lines is put in-between these tags.  The `option name` appears with a checkbox to the left, and when selected, loads the CLI lines.
 
-The default state of the checkbox is set by including either `(CHECKED)` or `(UNCHECKED)` in the tag. Every `#$ OPTION` tag must be closed with `#$ OPTION END`. The CLI payload goes in the middle.
+The default state of the checkbox may be set to either `(CHECKED)` or `(UNCHECKED)` by default.  CLI values that are not reset to defaults earlier in the preset must be `UNCHECHKED`.
 
-Complete `OPTION` syntax looks like this:
+Options can be 'grouped' under a 'title' or 'group name' using this syntax:
+
 ```
-#$ OPTION BEGIN (UNCHECKED): <Option name>
+#$ OPTION_GROUP BEGIN: your group name
+<options>
+#$ OPTION_GROUP END
+````
+
+Complete `OPTION` example syntax looks like this:
+```
+#$ OPTION_GROUP BEGIN: this group name
+#$ OPTION BEGIN (UNCHECKED): <Option1 name>
 CLI payload strings
 #$ OPTION END
+#$ OPTION BEGIN (UNCHECKED): <Option2 name>
+CLI payload strings
+#$ OPTION END
+#$ OPTION_GROUP END
 ```
 
 Note 1: nested `OPTION` tags are not supported.
